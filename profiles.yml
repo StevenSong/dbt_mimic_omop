@@ -1,0 +1,8 @@
+dbt_mimic_omop:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: data/mimic_to_omop.duckdb
+      schema: "omop"
+      threads: 1

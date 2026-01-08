@@ -1,0 +1,56 @@
+version: 2
+
+sources:
+  - name: mimic
+    database: mimic_to_omop
+    schema: mimic
+    tables:
+      - name: admissions
+      - name: caregiver
+      - name: chartevents
+      - name: d_hcpcs
+      - name: d_icd_diagnoses
+      - name: d_icd_procedures
+      - name: d_items
+      - name: d_labitems
+      - name: datetimeevents
+      - name: diagnoses_icd
+      - name: discharge
+      - name: discharge_detail
+      - name: drgcodes
+      - name: emar
+      - name: emar_detail
+      - name: hcpcsevents
+      - name: icustays
+      - name: ingredientevents
+      - name: inputevents
+      - name: labevents
+      - name: microbiologyevents
+      - name: omr
+      - name: outputevents
+      - name: patients
+      - name: pharmacy
+      - name: poe
+      - name: poe_detail
+      - name: prescriptions
+      - name: procedureevents
+      - name: procedures_icd
+      - name: provider
+      - name: radiology
+      - name: services
+      - name: transfers
+  - name: athena_vocabulary
+    database: mimic_to_omop
+    schema: athena
+    tables:
+      - name: CONCEPT
+      - name: CONCEPT_ANCESTOR
+      - name: CONCEPT_CLASS
+      - name: CONCPET_CPT4
+      - name: CONCEPT_RELATIONSHIP
+      - name: CONCEPT_SYNONYM
+      - name: DOMAIN
+      - name: DRUG_STRENGTH
+      - name: RELATIONSHIP
+      - name: VOCABULARY
+      - name: custom_mappings
