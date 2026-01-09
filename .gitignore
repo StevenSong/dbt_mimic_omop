@@ -3,3 +3,6 @@ target/
 dbt_packages/
 logs/
 data/mimic/*/
+data/athena_vocabulary/*.csv
+*.duckdb
+*.user.yml
