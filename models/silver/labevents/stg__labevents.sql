@@ -1,1 +1,21 @@
-select * from {{ source("mimic", "labevents") }}
+select 
+    labevent_id                         AS labevent_id,
+    subject_id                          AS subject_id,
+    charttime                           AS charttime,
+	storetime                           AS storetime,
+    hadm_id                             AS hadm_id,
+	specimen_id                         AS specimen_id,
+    itemid                              AS itemid,
+	order_provider_id                   AS order_provider_id,
+	valuenum                            AS valuenum,
+    valueuom                            AS valueuom,
+    value                               AS value,
+    flag                                AS flag,
+	priority                            AS priority,
+	comments                            AS comments,
+    ref_range_lower                     AS ref_range_lower,
+    ref_range_upper                     AS ref_range_upper,
+    'labevents'                         AS load_table_id,
+    hash(labevent_id)                   AS load_row_id,
+    json_object('labevent_id', labevent_id)::text AS trace_id
+from {{ source("mimic", "labevents") }}

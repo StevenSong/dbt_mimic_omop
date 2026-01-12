@@ -49,7 +49,7 @@ SELECT
                 THEN map_eth.source_concept_id
             ELSE NULL
         END, 0) AS ethnicity_source_concept_id,
-    'person.patients' AS unit_id,
+    'person.patients' AS unit_id
 FROM 
     {{ ref("stg__patients") }} p
 LEFT JOIN 

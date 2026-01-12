@@ -18,9 +18,9 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    omop.src_labevents src
+    {{ ref("stg__labevents") }} AS src
 INNER JOIN
-    omop.src_d_labitems dlab
+    {{ ref("stg__d_labitems") }} AS dlab
         ON src.itemid = dlab.itemid
 ), lk_meas_labevents_hadm_id AS (
 SELECT

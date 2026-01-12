@@ -1,0 +1,26 @@
+SELECT
+    microevent_id               AS microevent_id,
+    subject_id                  AS subject_id,
+    hadm_id                     AS hadm_id,
+	micro_specimen_id           AS micro_specimen_id,
+	order_provider_id           AS order_provider_id,
+    chartdate                   AS chartdate,
+    charttime                   AS charttime,
+    spec_itemid                 AS spec_itemid,
+    spec_type_desc              AS spec_type_desc,
+	storedate                   AS storedate,
+	storetime                   AS storetime,
+    test_itemid                 AS test_itemid,
+    test_name                   AS test_name,
+    org_itemid                  AS org_itemid,
+    org_name                    AS org_name,
+    ab_itemid                   AS ab_itemid,
+    ab_name                     AS ab_name,
+    dilution_comparison         AS dilution_comparison,
+    dilution_value              AS dilution_value,
+    interpretation              AS interpretation,
+    'microbiologyevents'        AS load_table_id,
+    hash(microevent_id, subject_id, hadm_id) AS load_row_id,
+    json_object('subject_id', subject_id, 'hadm_id', hadm_id, 'microevent_id', microevent_id)::text AS trace_id
+FROM
+    {{ source("mimic", "microbiologyevents") }} AS src

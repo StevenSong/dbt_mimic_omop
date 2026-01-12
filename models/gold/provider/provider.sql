@@ -5,7 +5,7 @@
 
 {% for rel in relationship_sources %}
     SELECT
-        hash(provider_id) AS provider_id,
+        provider_id AS provider_id,
         NULL AS provider_name,
         NULL AS npi,
         NULL AS dea,
@@ -17,7 +17,12 @@
         NULL AS specialty_source_value,
         NULL AS specialty_source_concept_id,
         NULL AS gender_source_value,
-        NULL AS gender_source_concept_id
+        NULL AS gender_source_concept_id,
+	    'provider' AS load_table_id,
+	    hash(provider_id) AS load_row_id,
+        json_object(
+            'provider_id', provider_id
+        )::text                             AS trace_id
     FROM
         {{ rel }}
 

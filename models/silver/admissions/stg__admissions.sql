@@ -8,7 +8,7 @@ SELECT
 	admit_provider_id                   AS admit_provider_id,
     admission_location                  AS admission_location,
     discharge_location                  AS discharge_location,
-    race                                AS ethnicity,
+    race                                AS race,
     edregtime                           AS edregtime,
 	edouttime                           AS edouttime,
     insurance                           AS insurance,
