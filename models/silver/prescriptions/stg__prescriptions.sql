@@ -1,0 +1,24 @@
+SELECT
+    hadm_id                             AS hadm_id,
+    subject_id                          AS subject_id,
+    pharmacy_id                         AS pharmacy_id,
+	order_provider_id                   AS order_provider_id,
+    starttime                           AS starttime,
+    stoptime                            AS stoptime,
+    drug_type                           AS drug_type,
+    drug                                AS drug,
+    gsn                                 AS gsn,
+    ndc                                 AS ndc,
+    prod_strength                       AS prod_strength,
+    form_rx                             AS form_rx,
+    dose_val_rx                         AS dose_val_rx,
+    dose_unit_rx                        AS dose_unit_rx,
+    form_val_disp                       AS form_val_disp,
+    form_unit_disp                      AS form_unit_disp,
+    doses_per_24_hrs                    AS doses_per_24_hrs,
+    route                               AS route,
+    'prescriptions'                     AS load_table_id,
+    hash(subject_id, hadm_id, pharmacy_id, starttime) AS load_row_id,
+    json_object('subject_id', subject_id, 'hadm_id', hadm_id, 'pharmacy_id', pharmacy_id, 'starttime', starttime)::text AS trace_id
+FROM
+    {{ source('mimic', 'prescriptions') }}

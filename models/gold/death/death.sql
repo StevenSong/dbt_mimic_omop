@@ -23,7 +23,7 @@ SELECT
 FROM
     {{  ref("int__lk_death_adm_mapped")  }} src
 INNER JOIN
-    {{  ref("cdm_person")  }} AS per
+    {{  ref("person")  }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 ),
 
@@ -44,7 +44,7 @@ patients_death AS (
 FROM
       {{  ref("int__lk_death_patients_mapped")  }} AS src
 INNER JOIN
-    {{  ref("cdm_person")  }} AS per
+    {{  ref("person")  }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 )
 

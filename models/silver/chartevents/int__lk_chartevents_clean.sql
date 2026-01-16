@@ -9,20 +9,17 @@ SELECT
     src.charttime AS start_datetime,
     TRIM(src.value) AS value,
     CASE
-        WHEN
-            TRIM(src.value) ~ '^[-]?\d+(\.\d+)?\s*[a-z]+$' -- 7.5 mm etc
-        THEN
-            CAST(SUBSTRING(TRIM(src.value) FROM '[-]?\d+(\.\d+)?') AS NUMERIC)
-        ELSE
-            src.valuenum
+        WHEN TRIM(src.value) ~ '^[-]?\d+(\.\d+)?\s*[a-z]+$'
+        THEN CAST(
+            regexp_extract(TRIM(src.value), '[-]?\d+(\.\d+)?', 0)
+            AS DOUBLE
+        )
+        ELSE src.valuenum
     END AS valuenum,
     CASE
-        WHEN
-            TRIM(src.value) ~ '^[-]?\d+(\.\d+)?\s*[a-z]+$' -- 7.5 mm etc
-        THEN
-            SUBSTRING(src.value FROM '[a-z]+')
-        ELSE
-            src.valueuom
+        WHEN TRIM(src.value) ~ '^[-]?\d+(\.\d+)?\s*[a-z]+$'
+        THEN regexp_extract(TRIM(src.value), '[a-z]+', 0)
+        ELSE src.valueuom
     END AS valueuom, -- unit of measurement
     --
     'chartevents' AS unit_id,

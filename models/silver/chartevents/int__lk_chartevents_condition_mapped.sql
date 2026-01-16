@@ -18,6 +18,6 @@ FROM
     {{ ref("int__lk_chartevents_clean") }} AS src
 INNER JOIN
     {{ ref("int__lk_chartevents_concept") }} AS c_main
-        ON c_main.source_code = src.value
-        AND c_main.source_vocabulary_id = 'mimiciv_meas_chartevents_value'
-        AND c_main.target_domain_id = 'Condition'
+        ON c_main.source_code = src.source_code
+        AND c_main.source_vocabulary_id = 'mimiciv_meas_chart'
+        AND c_main.target_domain_id = 'Condition' -- this is null TODO: why?

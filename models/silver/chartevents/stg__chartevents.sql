@@ -8,12 +8,12 @@ SELECT
 	value                                                 AS value,
 	CAST(valuenum AS float)                               AS valuenum,
 	valueuom                                              AS valueuom,
-	"chartevents"                                         AS load_table_id,
+	'chartevents'                                         AS load_table_id,
 	hash(subject_id, hadm_id, stay_id, charttime)         AS load_row_id,
 	json_object(
-        "subject_id", subject_id, 
-        "hadm_id", hadm_id, 
-        "stay_id", stay_id, 
-        "charttime", charttime)::text                     AS trace_id
+        'subject_id', subject_id, 
+        'hadm_id', hadm_id, 
+        'stay_id', stay_id, 
+        'charttime', charttime)                           AS trace_id
 FROM
 	{{ source("mimic", "chartevents") }}

@@ -22,7 +22,7 @@ for csv_file in CSV_DIR.glob("**/*.csv.gz"):
             CREATE TABLE IF NOT EXISTS mimic.{table_name} AS
             SELECT * FROM read_csv_auto('{csv_file}');
         """)
-    except duckdb.duckdb.ConversionException:
+    except duckdb.ConversionException:
         con.execute(f"""
             CREATE TABLE IF NOT EXISTS mimic.{table_name} AS
             SELECT * FROM read_csv_auto('{csv_file}', all_varchar=True);

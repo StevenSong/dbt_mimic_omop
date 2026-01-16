@@ -1,14 +1,17 @@
 with lk_meas_labevents_clean AS (
 SELECT
-    hash(src.subject_id, src.charttime, src.hadm_id) AS measurement_id, 
+    hash(src.subject_id, src.charttime, src.hadm_id, src.itemid, src.load_row_id) AS measurement_id, 
     src.subject_id AS subject_id,
     src.charttime AS start_datetime, -- measurement_datetime
     src.hadm_id AS hadm_id,
     src.itemid AS itemid,
     src.order_provider_id AS order_provider_id,
     src.value AS value, -- value_source_value
-    substring(src.value FROM '^(<=|>=|>|<|=|)') AS value_operator,
-    substring(src.value FROM '[-]?\d+\.?\d*') AS value_number, -- assume "-0.34 etc"
+    regexp_extract(src.value, '^(<=|>=|>|<|=|)', 1) AS value_operator,
+    NULLIF(
+        regexp_extract(TRIM(src.value), '([-]?[0-9]+(?:\.[0-9]+)?)', 1),
+        ''
+    ) AS value_number,
     NULLIF(TRIM(src.valueuom), '') AS valueuom, -- unit_source_value
     src.ref_range_lower AS ref_range_lower,
     src.ref_range_upper AS ref_range_upper,

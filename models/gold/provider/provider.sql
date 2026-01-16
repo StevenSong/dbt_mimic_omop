@@ -5,7 +5,7 @@
 
 {% for rel in relationship_sources %}
     SELECT
-        provider_id AS provider_id,
+        hash(provider_id) AS provider_id,
         NULL AS provider_name,
         NULL AS npi,
         NULL AS dea,

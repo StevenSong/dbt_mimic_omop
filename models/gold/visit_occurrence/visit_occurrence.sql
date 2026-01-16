@@ -34,7 +34,7 @@ SELECT
 FROM
     {{ ref("int__lk_visit_clean") }} AS src
 INNER JOIN
-    {{ ref("cdm_person") }} AS per
+    {{ ref("person") }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 LEFT JOIN
     {{ ref("int__lk_visit_concept") }} AS lat
@@ -46,7 +46,7 @@ LEFT JOIN
     {{ ref("int__lk_visit_concept") }} AS ld
         ON ld.source_code = src.discharge_location
 LEFT JOIN
-    {{ ref("cdm_care_site") }} AS cs
+    {{ ref("care_site") }} AS cs
         ON cs.care_site_name = 'BIDMC' -- Beth Israel hospital for all
 LEFT JOIN {{ ref("provider") }} AS prov
     ON src.provider_id = prov.load_row_id

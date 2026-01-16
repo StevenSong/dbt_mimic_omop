@@ -1,3 +1,5 @@
+-- person can be filtered by patients who have an observation period,
+-- but this is not required by the CDM
 SELECT
     hash(p.subject_id) AS person_id,
     CASE
