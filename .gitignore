@@ -2,7 +2,10 @@
 target/
 dbt_packages/
 logs/
-data/mimic/*/
+data/mimic/annotations/*
+!data/mimic/annotations/
+!data/mimic/annotations/.gitkeep
+data/mimic/physionet.org/
 data/athena_vocabulary/*.csv
 *.duckdb
 *.user.yml

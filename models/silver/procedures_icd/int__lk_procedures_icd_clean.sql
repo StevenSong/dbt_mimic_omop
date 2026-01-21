@@ -16,7 +16,7 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    omop.src_procedures_icd src
+    {{ ref("stg__procedures_icd") }} AS src
 INNER JOIN
-    omop.src_admissions adm
+    {{ ref("stg__admissions") }} AS adm
         ON src.hadm_id = adm.hadm_id

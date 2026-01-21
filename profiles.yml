@@ -4,5 +4,9 @@ dbt_mimic_omop:
     dev:
       type: duckdb
       path: data/mimic_to_omop.duckdb
-      schema: "omop"
+      schema: 'omop'
       threads: 1
+      settings:
+        preserve_insertion_order: false
+        memory_limit: '16GB'
+        max_memory: '16GB'

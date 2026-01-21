@@ -26,7 +26,7 @@ INNER JOIN
     {{ ref("person") }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref("visit_occurrence") }} AS vis
         ON vis.visit_source_value = 
             CONCAT(CAST(src.subject_id AS TEXT), '|', CAST(src.hadm_id AS TEXT))
 LEFT  JOIN 
@@ -65,7 +65,7 @@ INNER JOIN
     {{ ref("person") }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref("visit_occurrence") }} AS vis
         ON vis.visit_source_value = 
             CONCAT(CAST(src.subject_id AS TEXT), '|', CAST(src.hadm_id AS TEXT))
 LEFT JOIN 
@@ -104,7 +104,7 @@ INNER JOIN
     {{ ref("person") }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref("visit_occurrence") }} AS vis
         ON vis.visit_source_value = 
             CONCAT(CAST(src.subject_id AS TEXT), '|', CAST(src.hadm_id AS TEXT))
 LEFT JOIN 

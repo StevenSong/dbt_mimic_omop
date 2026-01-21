@@ -27,12 +27,21 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   dbt_mimic_omop:
-    bronze:
-      schema: bronze
-      +materialized: table
     silver:
-      schema: silver
+      +schema: silver
       +materialized: view
+      # these are materialised as tables due to memory restrictions
+      # this can be removed with enough available memory and will free up disk space
+      microbiologyevents:
+        int__lk_specimen_mapped:
+          +materialized: table
+        int__lk_meas_organism_mapped:
+          +materialized: table
+        int__lk_meas_ab_mapped:
+          +materialized: table
+      admissions:
+        int__lk_visit_clean:
+          +materialized: table
     gold:
-      schema: gold
+      +schema: gold
       +materialized: table

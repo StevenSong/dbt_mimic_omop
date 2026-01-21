@@ -10,7 +10,7 @@ SELECT
     p.anchor_year-p.anchor_age AS year_of_birth,
     NULL AS month_of_birth,
     NULL AS day_of_birth,
-    NULL AS birth_datetime,
+    CAST(NULL AS DATETIME) AS birth_datetime,
     COALESCE(
         CASE
             WHEN map_eth.target_vocabulary_id <> 'Ethnicity' 
@@ -26,7 +26,7 @@ SELECT
     NULL AS location_id,
     NULL AS provider_id,
     NULL AS care_site_id,
-    p.subject_id AS person_source_value,
+    CAST(p.subject_id AS VARCHAR(50)) AS person_source_value,
     p.gender AS gender_source_value,
     0 AS gender_source_concept_id,
     CASE
@@ -50,8 +50,7 @@ SELECT
             WHEN map_eth.target_vocabulary_id = 'Ethnicity' 
                 THEN map_eth.source_concept_id
             ELSE NULL
-        END, 0) AS ethnicity_source_concept_id,
-    'person.patients' AS unit_id
+        END, 0) AS ethnicity_source_concept_id
 FROM 
     {{ ref("stg__patients") }} p
 LEFT JOIN 

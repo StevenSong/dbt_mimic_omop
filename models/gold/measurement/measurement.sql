@@ -28,17 +28,17 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    {{ ref("int__lk_meas_labevents_mapped") }} src
+    {{ ref('int__lk_meas_labevents_mapped') }} src
 INNER JOIN
-    {{ ref("person") }} per
+    {{ ref('person') }} per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} vis
+    {{ ref('visit_occurrence') }} vis
         ON vis.visit_source_value =
             CONCAT(CAST(src.subject_id AS TEXT), '|',
                 COALESCE(CAST(src.hadm_id AS TEXT), CAST(src.date_id AS TEXT)))
 LEFT JOIN
-    {{ ref("provider") }} prov
+    {{ ref('provider') }} prov
         ON prov.provider_source_value = CAST(src.provider_id AS TEXT)
 WHERE
     src.target_domain_id = 'Measurement'
@@ -75,16 +75,16 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    {{ ref("int__lk_chartevents_mapped") }} AS src
+    {{ ref('int__lk_chartevents_mapped') }} AS src
 INNER JOIN
-    {{ ref("person") }} AS per
+    {{ ref('person') }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref('visit_occurrence') }} AS vis
         ON vis.visit_source_value =
             CONCAT(CAST(src.subject_id AS TEXT), '|', CAST(src.hadm_id AS TEXT))
 LEFT JOIN
-    {{ ref("provider") }} AS prov
+    {{ ref('provider') }} AS prov
         ON prov.provider_source_value = CAST(src.provider_id AS TEXT)
 WHERE
     src.target_domain_id = 'Measurement'
@@ -121,17 +121,17 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    {{ ref("int__lk_meas_organism_mapped") }} AS src
+    {{ ref('int__lk_meas_organism_mapped') }} AS src
 INNER JOIN
-    {{ ref("person") }} AS per
+    {{ ref('person') }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref('visit_occurrence') }} AS vis
         ON vis.visit_source_value =
             CONCAT(CAST(src.subject_id AS TEXT), '|',
                 COALESCE(CAST(src.hadm_id AS TEXT), CAST(src.date_id AS TEXT)))
 LEFT JOIN
-    {{ ref("provider") }} AS prov
+    {{ ref('provider') }} AS prov
         ON prov.provider_source_value = CAST(src.provider_id AS TEXT)
 WHERE
     src.target_domain_id = 'Measurement'
@@ -168,17 +168,17 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    {{ ref("int__lk_meas_ab_mapped") }} AS src
+    {{ ref('int__lk_meas_ab_mapped') }} AS src
 INNER JOIN
-    {{ ref("person") }} AS per
+    {{ ref('person') }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref('visit_occurrence') }} AS vis
         ON vis.visit_source_value =
             CONCAT(CAST(src.subject_id AS TEXT), '|',
                 COALESCE(CAST(src.hadm_id AS TEXT), CAST(src.date_id AS TEXT)))
 LEFT JOIN
-    {{ ref("provider") }} AS prov
+    {{ ref('provider') }} AS prov
         ON prov.provider_source_value = CAST(src.provider_id AS TEXT)
 WHERE
     src.target_domain_id = 'Measurement'
@@ -215,14 +215,14 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM
-    {{ ref("int__lk_outputevents_mapped") }} AS src
+    {{ ref('int__lk_outputevents_mapped') }} AS src
 INNER JOIN
-    {{ ref("person") }} AS per
+    {{ ref('person') }} AS per
         ON CAST(src.subject_id AS TEXT) = per.person_source_value
 INNER JOIN
-    {{ ref("cdm_visit_occurrence") }} AS vis
+    {{ ref('visit_occurrence') }} AS vis
         ON vis.visit_source_value =
             CONCAT(CAST(src.subject_id AS TEXT), '|', CAST(src.hadm_id AS TEXT))
 LEFT JOIN
-    {{ ref("provider") }} AS prov
+    {{ ref('provider') }} AS prov
         ON prov.provider_source_value = CAST(src.provider_id AS TEXT)

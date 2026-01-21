@@ -49,7 +49,7 @@ LEFT JOIN
     {{ ref('person') }} AS per
         ON src.subject_id::text = per.person_source_value
 LEFT JOIN
-    {{ ref('cdm_visit_occurrence') }} AS vo
+    {{ ref('visit_occurrence') }} AS vo
         ON src.hamd_id::text = split_part(vo.visit_source_value, '|', 2)
 LEFT JOIN
     {{ ref('visit_detail') }} AS vd

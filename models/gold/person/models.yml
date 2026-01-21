@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: person
+    description: >
+      The PERSON table contains records that uniquely identify each individual
+      in the data source. This table captures demographic information such as
+      sex at birth, race, ethnicity, and date of birth, following the OMOP CDM
+      conventions.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: person_id
+        data_type: UBIGINT
+        description: Unique identifier for each person in the dataset.
+        tests:
+          - not_null
+          - unique
+
+      - name: gender_concept_id
+        data_type: INT
+        description: Patients biological gender concept id
+        tests:
+          - not_null
+
+      - name: year_of_birth
+        data_type: INT
+        description: Patients year of birth
+        tests:
+          - not_null
+
+      - name: month_of_birth
+        data_type: INT
+        description: Month of birth of the person, if available.
+
+      - name: day_of_birth
+        data_type: INT
+        description: Day of birth of the person, if available.
+
+      - name: birth_datetime
+        data_type: Datetime
+        description: Datetime of birth of the person, if available.
+
+      - name: race_concept_id
+        data_type: BIGINT
+        description: Concept ID representing the race or ethnic background of the person
+        tests:
+          - not_null
+
+      - name: ethnicity_concept_id
+        data_type: BIGINT
+        description: Concept ID representing ethnicity as defined by the US OMB standard.
+        tests:
+          - not_null
+
+      - name: location_id
+        data_type: INT
+        description: Identifier for the last known physical location of the person.
+
+      - name: provider_id
+        data_type: INT
+        description: Identifier for the last known primary care provider of the person.
+
+      - name: care_site_id
+        data_type: INT
+        description: Identifier for the care site where the provider typically provides care.
+
+      - name: person_source_value
+        data_type: varchar(50)
+        description: Identifier for the person as it appears in the source data.
+
+      - name: gender_source_value
+        data_type: varchar(50)
+        description: Biological sex of the person as recorded in the source data.
+
+      - name: gender_source_concept_id
+        data_type: INT
+        description: Concept ID representing the source-coded biological sex, if applicable.
+
+      - name: race_source_value
+        data_type: varchar(50)
+        description: Race of the person as recorded in the source data.
+
+      - name: race_source_concept_id
+        data_type: BIGINT
+        description: Concept ID representing the source-coded race, if applicable.
+
+      - name: ethnicity_source_value
+        data_type: varchar(50)
+        description: Ethnicity of the person as recorded in the source data.
+
+      - name: ethnicity_source_concept_id
+        data_type: BIGINT
+        description: Concept ID representing the source-coded ethnicity, if applicable.
+  

@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: cdm_source
+    description: >
+      The CDM_SOURCE table contains detail about the source 
+      database and the process used to transform the data into 
+      the OMOP Common Data Model.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: cdm_source_name
+        data_type: varchar(255)
+        description: Name of CDM instance
+        tests:
+          - not_null
+          - unique
+          
+      - name: cdm_source_abbreviation
+        data_type: varchar(25)
+        description: Abbreviation for the CDM instance
+        tests:
+          - not_null
+
+      - name: cdm_holder

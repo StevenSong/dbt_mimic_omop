@@ -1,10 +1,13 @@
 [project]
 name = "dbt-mimic-omop"
 version = "0.1.0"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 
 dependencies = [
     "duckdb>=1.2.2",
     "dbt-core>=1.8.7",
     "dbt-duckdb>=1.9",
+    "opensearch-py>=3.1.0",
+    "tdqm>=4.0",
+    "pandas>=2.0"
 ]

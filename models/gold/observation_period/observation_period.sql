@@ -5,7 +5,7 @@ SELECT
     MAX(src.visit_end_date) AS end_date,
     src.unit_id AS unit_id
 FROM
-    {{ ref('cdm_visit_occurrence') }} AS src
+    {{ ref('visit_occurrence') }} AS src
 GROUP BY
     src.person_id, src.unit_id
 
