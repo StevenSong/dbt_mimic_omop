@@ -7,7 +7,7 @@ SELECT
     CAST(src.end_datetime AS DATE) AS visit_end_date,
     src.end_datetime AS visit_end_datetime,
     32817 AS visit_type_concept_id,   -- EHR Type Concept Standard
-    prov.load_row_id AS provider_id,
+    prov.provider_id AS provider_id,
     cs.care_site_id AS care_site_id,
     src.source_value AS visit_source_value, -- it should be an ID for visits
     COALESCE(lat.source_concept_id, 0) AS visit_source_concept_id, -- it is where visit_concept_id comes from
@@ -25,12 +25,7 @@ SELECT
     LAG(src.visit_occurrence_id) OVER (
         PARTITION BY subject_id, hadm_id
         ORDER BY start_datetime
-    ) AS preceding_visit_occurrence_id,
-    --
-    CONCAT('visit.', src.unit_id) AS unit_id,
-    src.load_table_id AS load_table_id,
-    src.load_row_id AS load_row_id,
-    src.trace_id AS trace_id
+    ) AS preceding_visit_occurrence_id
 FROM
     {{ ref("int__lk_visit_clean") }} AS src
 INNER JOIN
@@ -49,4 +44,4 @@ LEFT JOIN
     {{ ref("care_site") }} AS cs
         ON cs.care_site_name = 'BIDMC' -- Beth Israel hospital for all
 LEFT JOIN {{ ref("provider") }} AS prov
-    ON src.provider_id = prov.load_row_id
+    ON src.provider_id = prov.provider_id

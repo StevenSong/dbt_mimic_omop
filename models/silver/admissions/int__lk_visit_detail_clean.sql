@@ -1,5 +1,5 @@
 SELECT
-    hash(src.subject_id, src.hadm_id) AS visit_detail_id,
+    hash(src.subject_id, src.hadm_id, src.load_row_id) AS visit_detail_id,
     src.subject_id AS subject_id,
     src.hadm_id AS hadm_id,
     src.date_id AS date_id,

@@ -3,10 +3,10 @@ SELECT
     per.person_id AS person_id,
     COALESCE(vdc.target_concept_id, 0) AS visit_detail_concept_id,
                                        -- see source value in care_site.care_site_source_value
-    CAST(src.start_datetime AS DATE) AS visit_start_date,
-    src.start_datetime AS visit_start_datetime,
-    CAST(src.end_datetime AS DATE) AS visit_end_date,
-    src.end_datetime AS visit_end_datetime,
+    CAST(src.start_datetime AS DATE) AS visit_detail_start_date,
+    src.start_datetime AS visit_detail_start_datetime,
+    CAST(src.end_datetime AS DATE) AS visit_detail_end_date,
+    src.end_datetime AS visit_detail_end_datetime,
     32817 AS visit_detail_type_concept_id,   -- EHR   Type Concept    Standard
     prov.provider_id AS provider_id,
     cs.care_site_id AS care_site_id,
@@ -25,13 +25,8 @@ SELECT
         ELSE NULL
     END AS discharged_to_concept_id,
     src.preceding_visit_detail_id AS preceding_visit_detail_id,
-    CAST(NULL AS INTEGER) AS parent_visit_detail_id,
-    vis.visit_occurrence_id AS visit_occurrence_id,
-    --
-    CONCAT('visit_detail.', src.unit_id) AS unit_id,
-    src.load_table_id AS load_table_id,
-    src.load_row_id AS load_row_id,
-    src.trace_id AS trace_id
+    CAST(NULL AS UBIGINT) AS parent_visit_detail_id,
+    vis.visit_occurrence_id AS visit_occurrence_id
 FROM
     {{ ref("int__lk_visit_detail_prev_next") }} AS src
 INNER JOIN
