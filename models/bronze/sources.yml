@@ -16,6 +16,7 @@ sources:
       - name: datetimeevents
       - name: diagnoses_icd
       - name: discharge
+      - name: discharge_annotations
       - name: discharge_detail
       - name: drgcodes
       - name: emar
@@ -37,6 +38,7 @@ sources:
       - name: procedures_icd
       - name: provider
       - name: radiology
+      - name: radiology_annotations
       - name: services
       - name: transfers
   - name: athena_vocabulary

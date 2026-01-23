@@ -13,13 +13,8 @@ SELECT
     END AS death_datetime,
     src.type_concept_id AS death_type_concept_id,
     0 AS cause_concept_id,
-    NULL AS cause_source_value,
-    0 AS cause_source_concept_id,
-    --
-    CONCAT('death.', src.unit_id) AS unit_id,
-    src.load_table_id AS load_table_id,
-    src.load_row_id AS load_row_id,
-    src.trace_id AS trace_id
+    CAST(NULL AS VARCHAR(50)) AS cause_source_value,
+    0 AS cause_source_concept_id
 FROM
     {{  ref("int__lk_death_adm_mapped")  }} src
 INNER JOIN
@@ -34,13 +29,8 @@ patients_death AS (
     NULL AS death_datetime,
     src.type_concept_id AS death_type_concept_id,
     0 AS cause_concept_id,
-    NULL AS cause_source_value,
-    0 AS cause_source_concept_id,
-    --
-    CONCAT('death.', src.unit_id) AS unit_id,
-    src.load_table_id AS load_table_id,
-    src.load_row_id AS load_row_id,
-    src.trace_id AS trace_id
+    CAST(NULL AS VARCHAR(50)) AS cause_source_value,
+    0 AS cause_source_concept_id
 FROM
       {{  ref("int__lk_death_patients_mapped")  }} AS src
 INNER JOIN

@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: note
+    description: >
+      The NOTE table captures unstructured information that was recorded by a 
+      provider about a patient in free text (in ASCII, or preferably in UTF8 
+      format) notes on a given date. 
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: note_id
+        data_type: UBIGINT
+        description: Unique identifier for each note
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: Unique identifier for each person 
+        tests:
+          - not_null
+
+      - name: note_date
+        data_type: date
+        description: The date the note was recorded. 
+        tests:
+          - not_null
+
+      - name: note_datetime
+        data_type: datetime
+        description: The datetime the note was recorded 
+        
+      - name: note_type_concept_id
+        data_type: INT
+        description: The provenance of the note. Most likely this will be EHR. 
+        tests:
+          - not_null
+
+      - name: note_class_concept_id
+        data_type: INT
+        description: Map the note classification to a standard concept
+        tests:
+          - not_null
+
+      - name: note_title
+        data_type: varchar(250)
+        description: The title of the note.
+
+      - name: note_text
+        data_type: varchar
+        description: The content of the note.
+        tests:
+          - not_null
+
+      - name: encoding_concept_id
+        data_type: INT
+        description: This is the Concept representing the character encoding type.
+        tests:
+          - not_null
+      
+      - name: language_concept_id
+        data_type: INT
+        description: This is the Concept representing the language.
+        tests:
+          - not_null
+
+      - name: provider_id
+        data_type: INT
+        description: The Provider who wrote the note.
+
+      - name: visit_occurrence_id
+        data_type: UBIGINT
+        description: The Visit during which the note was written. 
+
+      - name: visit_detail_id
+        data_type: UBIGINT
+        description: The Visit Detail during which the note was written. 
+
+      - name: note_source_value
+        data_type: varchar(50)
+        description: The source value mapped to the NOTE_CLASS_CONCEPT_ID.
+
+      - name: note_event_id
+        data_type: INT
+        description: If the Note record is related to another record in the database
+
+      - name: note_event_field_concept_id
+        data_type: INT
+        description: If the Note record is related to another record in the database

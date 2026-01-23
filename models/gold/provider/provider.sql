@@ -6,23 +6,18 @@
 {% for rel in relationship_sources %}
     SELECT
         hash(provider_id) AS provider_id,
-        NULL AS provider_name,
-        NULL AS npi,
-        NULL AS dea,
+        CAST(NULL AS VARCHAR(255)) AS provider_name,
+        CAST(NULL AS VARCHAR(20)) AS npi,
+        CAST(NULL AS VARCHAR(20)) AS dea,
         NULL AS specialty_concept_id,
         NULL AS care_site_id,
         NULL AS year_of_birth,
-        NULL AS gender_concept_id,
+        CAST(NULL AS INT) AS gender_concept_id,
         CAST(provider_id AS VARCHAR(50)) AS provider_source_value,
-        NULL AS specialty_source_value,
+        CAST(NULL AS VARCHAR(50)) AS specialty_source_value,
         NULL AS specialty_source_concept_id,
-        NULL AS gender_source_value,
-        NULL AS gender_source_concept_id,
-	    'provider' AS load_table_id,
-	    hash(provider_id) AS load_row_id,
-        json_object(
-            'provider_id', provider_id
-        )::text                             AS trace_id
+        CAST(NULL AS VARCHAR(50)) AS gender_source_value,
+        NULL AS gender_source_concept_id
     FROM
         {{ rel }}
 

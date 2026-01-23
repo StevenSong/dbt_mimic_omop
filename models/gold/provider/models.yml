@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: provider
+    description: >
+      The PROVIDER table contains a list of uniquely identified healthcare 
+      providers; duplication is not allowed. These are individuals providing 
+      hands-on healthcare to patients, such as physicians, nurses, midwives, 
+      physical therapists etc.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: provider_id
+        data_type: UBIGINT
+        description: Unique identifier for the healthcare provider.
+        tests:
+          - not_null
+          - unique
+
+      - name: provider_name
+        data_type: VARCHAR(255)
+        description: This field contains information that describes a healthcare provider. 
+
+      - name: npi
+        data_type: VARCHAR(20)
+        description: This is the National Provider Number issued to health care providers.
+
+      - name: dea
+        data_type: VARCHAR(20)
+        description: The DEA (Drug Enforcement Administration) number for the provider.
+
+      - name: specialty_concept_id
+        data_type: INT
+        description: This field either represents the most common specialty of the provider
+
+      - name: care_site_id
+        data_type: INT
+        description: The primary care site the provider operates from.
+
+      - name: year_of_birth
+        data_type: INT
+        description: The year of birth of the provider.
+
+      - name: gender_concept_id
+        data_type: INT
+        description: This field represents the recorded gender of the provider.
+
+      - name: provider_source_value
+        data_type: VARCHAR(50)
+        description: Use this field to link back to providers in the source data. 
+
+      - name: specialty_source_value
+        data_type: VARCHAR(50)
+        description: This refers to the specific field of expertise listed in the source data
+
+      - name: specialty_source_concept_id
+        data_type: INT
+        description: If the source data codes provider specialty in an OMOP vocabulary.
+
+      - name: gender_source_value
+        data_type: VARCHAR(50)
+        description: If the source data codes provider specialty in an OMOP vocabulary.
+
+      - name: gender_source_concept_id
+        data_type: INT
+        description: If the source data codes provider specialty in an OMOP vocabulary.

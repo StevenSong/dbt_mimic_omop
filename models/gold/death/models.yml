@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: death
+    description: >
+      The death domain contains the clinical event for how and when a Person dies.
+      A person can have up to one record if the source system contains evidence about 
+      the Death, such as: Condition in an administrative claim, status of enrollment 
+      into a health plan, or explicit record in EHR data.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: person_id
+        data_type: UBIGINT
+        description: Unique identifier for person in the dataset.
+        tests:
+          - not_null
+          - unique
+
+      - name: death_date
+        data_type: date
+        description: The date the person was deceased. 
+        tests:
+          - not_null
+
+      - name: death_datetime
+        data_type: datetime
+        description: The datetime the person was deceased. 
+
+      - name: death_type_concept_id
+        data_type: INT
+        description: This is the provenance of the death record, i.e., where it came from.
+
+      - name: cause_concept_id
+        data_type: INT
+        description: This is the Standard Concept representing the Person’s cause of death, if available. 
+
+      - name: cause_source_value
+        data_type: VARCHAR(50)
+        description: If available, put the source code representing the cause of death here. 
+
+      - name: cause_source_concept_id
+        data_type: INT
+        description: If the cause of death was coded using a Vocabulary present in the OMOP Vocabularies.
