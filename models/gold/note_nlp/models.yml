@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: note_nlp
+    description: >
+      The NOTE_NLP table encodes all output of NLP on clinical notes. 
+      Each row represents a single extracted term from a note.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: note_nlp_id
+        data_type: UBIGINT
+        description: Unique identifier for each note
+        tests:
+          - not_null
+          - unique
+
+      - name: note_id
+        data_type: UBIGINT
+        description: Foreign key to NOTE table
+        tests:
+          - not_null
+
+      - name: section_concept_id
+        data_type: INTEGER
+        description: Concept identifier for the section of the note
+
+      - name: snippet
+        data_type: VARCHAR(250)
+        description: The snippet of text from the note where the term was found
+
+      - name: '"offset"'
+        data_type: VARCHAR(50)
+        description: The character offset of the term in the note
+
+      - name: lexical_variant
+        data_type: VARCHAR(250)
+        description: The lexical variant of the term found in the note
+        tests:
+          - not_null
+
+      - name: note_nlp_concept_id
+        data_type: BIGINT
+        description: Concept identifier for the NLP term
+
+      - name: note_nlp_source_concept_id
+        data_type: VARCHAR(250)
+        description: Concept identifier for the source of the NLP term
+
+      - name: nlp_system
+        data_type: VARCHAR(250)
+        description: The NLP system used to extract the term
+
+      - name: nlp_date
+        data_type: DATE
+        description: The date when the NLP was performed
+        tests:
+          - not_null
+
+      - name: nlp_datetime
+        data_type: TIMESTAMP
+        description: The date and time when the NLP was performed
+
+      - name: term_exists
+        data_type: VARCHAR(1)
+        description: Indicates whether the patient has the term (Y/N)
+
+      - name: term_temporal
+        data_type: VARCHAR(20)
+        description: Temporal context of the term (e.g., current, past)
+
+      - name: term_modifiers
+        data_type: VARCHAR(2000)
+        description: Additional modifiers for the term (i.e. negation, conditional)

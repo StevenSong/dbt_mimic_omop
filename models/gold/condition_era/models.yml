@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: condition_era
+    description: >
+      The Condition Era is defined as a span of time when the Person is assumed 
+      to have a given condition.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: condition_era_id
+        data_type: UBIGINT
+        description: >
+          A unique identifier for the condition era.
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: >
+          A unique identifier for the person who has the condition.
+        tests:
+          - not_null
+
+      - name: condition_concept_id
+        data_type: BIGINT
+        description: >
+          The concept identifier for the condition.
+        tests:
+          - not_null
+
+      - name: condition_era_start_date
+        data_type: DATE
+        description: >
+          The start date of the condition era.
+        tests:
+          - not_null
+
+      - name: condition_era_end_date
+        data_type: DATE
+        description: >
+          The end date of the condition era.
+        tests:
+          - not_null
+
+      - name: condition_occurrence_count
+        data_type: BIGINT
+        description: >
+          The number of condition occurrences that contributed to this condition era.

@@ -1,5 +1,5 @@
 SELECT
-    hash(src.subject_id, src.hadm_id, src.stay_id, src.start_datetime) AS measurement_id,
+    src.load_row_id AS measurement_id,
     src.subject_id AS subject_id,
     src.hadm_id AS hadm_id,
     src.stay_id AS stay_id,
@@ -35,8 +35,8 @@ SELECT
     --
     CONCAT('meas.', src.unit_id) AS unit_id,
     src.load_table_id AS load_table_id,
-    src.load_row_id AS load_row_id,
-    src.trace_id AS trace_id
+    src.trace_id AS trace_id,
+    src.load_row_id AS load_row_id
 FROM
     {{ ref("int__lk_chartevents_clean") }} AS src -- ce
 LEFT JOIN

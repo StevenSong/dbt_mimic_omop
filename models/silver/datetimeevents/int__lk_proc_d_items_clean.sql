@@ -6,7 +6,6 @@ SELECT
     src.value AS quantity,
     src.itemid AS itemid,
     src.caregiver_id AS provider_id,
-                            -- THEN it stores the duration... this is a warkaround and may be inproved
     --
     'procedureevents' AS unit_id,
     src.load_table_id AS load_table_id,
@@ -15,9 +14,9 @@ SELECT
 FROM
     {{ ref("stg__procedureevents" )}} AS src
 WHERE
-    src.cancelreason = 0 -- not cancelled
+    src.cancelreason = 0
 
-union all
+UNION ALL
 
 SELECT
     src.subject_id AS subject_id,
@@ -33,7 +32,7 @@ SELECT
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id    
 FROM
-    {{ ref("stg__datetimeevents")}} AS src -- de
+    {{ ref("stg__datetimeevents")}} AS src
 INNER JOIN
     {{ ref("stg__patients")}} AS pat
         ON pat.subject_id = src.subject_id

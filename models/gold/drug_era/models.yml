@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: drug_era
+    description: >
+      The Drug Era is defined as a span of time when the Person is assumed 
+      to have been given a drug.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: drug_era_id
+        data_type: UBIGINT
+        description: >
+          A unique identifier for the drug era.
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: >
+          A unique identifier for the person who has taken the drug.
+        tests:
+          - not_null
+
+      - name: drug_concept_id
+        data_type: BIGINT
+        description: >
+          The concept identifier for the drug.
+        tests:
+          - not_null
+
+      - name: drug_era_start_date
+        data_type: DATE
+        description: >
+          The start date of the drug era.
+        tests:
+          - not_null
+
+      - name: drug_era_end_date
+        data_type: DATE
+        description: >
+          The end date of the drug era.
+        tests:
+          - not_null
+
+      - name: drug_exposure_count
+        data_type: BIGINT
+        description: >
+          The number of drug exposures that contributed to this drug era.
+
+      - name: gap_days
+        data_type: BIGINT
+        description: >
+          The maximum number of days allowed between two drug exposures for them to be considered part of the same drug era.

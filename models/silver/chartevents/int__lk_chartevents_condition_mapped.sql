@@ -11,7 +11,7 @@ SELECT
     c_main.target_concept_id AS target_concept_id,
     --
     CONCAT('cond.', src.unit_id) AS unit_id,
-    src.load_table_id AS load_table_id,
+    CONCAT('cond.', src.load_table_id) AS load_table_id,
     src.load_row_id AS load_row_id,
     src.trace_id AS trace_id
 FROM

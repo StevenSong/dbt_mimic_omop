@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: dose_era
+    description: >
+      A Dose Era is defined as a span of time when the Person is assumed 
+      to be exposed to a constant dose of a specific active ingredient.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: dose_era_id
+        data_type: UBIGINT
+        description: >
+          A unique identifier for the dose era.
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: >
+          A unique identifier for the person who has takes the dosage.
+        tests:
+          - not_null
+
+      - name: drug_concept_id
+        data_type: BIGINT
+        description: >
+          The concept identifier for the drug.
+        tests:
+          - not_null
+
+      - name: unit_concept_id
+        data_type: BIGINT
+        description: >
+          The concept identifier for the unit of measurement for the dose.
+        tests:
+          - not_null
+
+      - name: dose_value
+        data_type: DOUBLE
+        description: >
+          The amount of the drug taken per administration.
+        tests:
+          - not_null
+
+      - name: dose_era_start_date
+        data_type: DATE
+        description: >
+          The start date of the dose era.
+        tests:
+          - not_null
+
+      - name: dose_era_end_date
+        data_type: DATE
+        description: >
+          The end date of the dose era.
+        tests:
+          - not_null

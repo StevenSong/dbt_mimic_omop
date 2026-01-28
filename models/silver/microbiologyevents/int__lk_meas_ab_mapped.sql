@@ -1,5 +1,5 @@
 SELECT
-    hash(src.subject_id, src.start_datetime, src.load_row_id, src.load_table_id) AS measurement_id,
+    src.load_row_id AS measurement_id,
     src.subject_id AS subject_id,
     COALESCE(src.hadm_id, hadm.hadm_id) AS hadm_id,
     CAST(src.start_datetime AS DATE) AS date_id,

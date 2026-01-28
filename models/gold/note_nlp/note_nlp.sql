@@ -44,7 +44,7 @@ mapped_concepts AS (
 
 SELECT
     hash(src.meta_note_id, src.nlp_id) AS note_nlp_id,
-    src.meta_note_id                  AS note_id,
+    hash(src.meta_note_id)             AS note_id,
     0                                 AS section_concept_id,
 
     SUBSTRING(
@@ -61,11 +61,11 @@ SELECT
     src.nlp_source_value                    AS lexical_variant,
 
     mc.standard_concept_id                 AS note_nlp_concept_id,
-    mc.source_concept_id                   AS note_nlp_source_concept_id,
+    CAST(mc.source_concept_id AS VARCHAR)                   AS note_nlp_source_concept_id,
 
     CONCAT(src.service_model, src.service_version) AS nlp_system,
-    CAST(src.timestamp AS date)            AS nlp_date,
-    src.timestamp                          AS nlp_datetime,
+    CAST(src.timestamp AS DATE)            AS nlp_date,
+    CAST(src.timestamp AS DATETIME)                          AS nlp_datetime,
 
     CASE
         WHEN src.nlp_meta_anns_Presence_value = 'True'  THEN 'T'

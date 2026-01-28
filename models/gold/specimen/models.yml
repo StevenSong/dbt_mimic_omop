@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: specimen
+    description: >
+      The specimen domain contains the records identifying biological samples 
+      from a person.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: specimen_id
+        data_type: UBIGINT
+        description: Unique identifier for each specimen.
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: The person from whom the specimen is collected. 
+        tests:
+          - not_null
+
+      - name: specimen_concept_id
+        data_type: BIGINT
+        description: CONCEPT_ID that the SPECIMEN_SOURCE_VALUE maps to in the specimen domain.
+        tests:
+          - not_null
+
+      - name: specimen_type_concept_id
+        data_type: INT
+        description: source of the specimen record, as in an EHR system.
+        tests:
+          - not_null
+
+      - name: specimen_date
+        data_type: date
+        description: Date of collection of the specimen.
+        tests:
+          - not_null
+
+      - name: specimen_datetime
+        data_type: datetime
+        description: Datetime of collection of the specimen.
+
+      - name: quantity
+        data_type: DOUBLE
+        description: Amount of the specimen collected.
+
+      - name: unit_concept_id
+        data_type: INT
+        description: The unit for the quantity of the specimen. 
+
+      - name: anatomic_site_concept_id
+        data_type: INT
+        description: The anatomical site from which the specimen was collected.
+
+      - name: disease_status_concept_id
+        data_type: INT
+        description: The disease status of the specimen?
+
+      - name: specimen_source_id
+        data_type: VARCHAR(50)
+        description: Identifier for the specimen from the source system.
+
+      - name: specimen_source_value
+        data_type: VARCHAR(50)
+        description: The original source value for the specimen.
+
+      - name: unit_source_value
+        data_type: VARCHAR(50)
+        description: The original source value for the unit of the specimen quantity.
+
+      - name: anatomic_site_source_value
+        data_type: VARCHAR(50)
+        description: The original source value for the anatomical site.
+
+      - name: disease_status_source_value 
+        data_type: VARCHAR(50)
+        description: The original source value for the disease status.

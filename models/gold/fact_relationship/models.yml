@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fact_relationship
+    description: >
+      The FACT_RELATIONSHIP table contains records about the relationships between 
+      facts stored as records in any table of the CDM. 
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: domain_concept_id_1
+        data_type: INT
+        description: >
+          A foreign key to the CONCEPT table that identifies the domain of the first 
+          fact in the relationship.
+        tests:
+          - not_null
+
+
+      - name: domain_concept_id_2
+        data_type: INT
+        description: >
+          A foreign key to the CONCEPT table that identifies the domain of the second 
+          fact in the relationship.
+        tests:
+          - not_null
+
+      - name: relationship_concept_id
+        data_type: INT
+        description: >
+          A foreign key to the CONCEPT table that identifies the type of relationship 
+          between the two facts.
+        tests:
+          - not_null
+
+      - name: fact_id_1
+        data_type: UBIGINT
+        description: >
+          The ID of the first fact in the relationship. This is a foreign key to the 
+          primary key of the table identified by domain_concept_id_1.
+        tests:
+          - not_null
+
+      - name: fact_id_2
+        data_type: UBIGINT
+        description: >
+          The ID of the second fact in the relationship. This is a foreign key to the 
+          primary key of the table identified by domain_concept_id_2.
+        tests:
+          - not_null

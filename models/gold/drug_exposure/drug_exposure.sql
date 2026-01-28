@@ -1,32 +1,27 @@
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS drug_exposure_id,
+    hash(per.person_id, src.hadm_id, vis.visit_occurrence_id, src.load_row_id, src.target_concept_id) AS drug_exposure_id,
     per.person_id AS person_id,
     src.target_concept_id AS drug_concept_id,
     CAST(src.start_datetime AS DATE) AS drug_exposure_start_date,
     src.start_datetime AS drug_exposure_start_datetime,
     CAST(src.end_datetime AS DATE) AS drug_exposure_end_date,
     src.end_datetime AS drug_exposure_end_datetime,
-    NULL AS verbatim_end_date,
+    CAST(NULL AS DATE) AS verbatim_end_date,
     src.type_concept_id AS drug_type_concept_id,
-    NULL AS stop_reason,
+    CAST(NULL AS VARCHAR(20)) AS stop_reason,
     NULL AS refills,
-    src.quantity AS quantity,
+    CAST(src.quantity AS DOUBLE) AS quantity,
     NULL AS days_supply,
-    NULL AS sig,
+    CAST(NULL AS VARCHAR) AS sig,
     src.route_concept_id AS route_concept_id,
-    NULL AS lot_number,
+    CAST(NULL AS VARCHAR(50)) AS lot_number,
     prov.provider_id AS provider_id,
     vis.visit_occurrence_id AS visit_occurrence_id,
-    NULL AS visit_detail_id,
+    CAST(NULL AS BIGINT) AS visit_detail_id,
     src.source_code AS drug_source_value,
     src.source_concept_id AS drug_source_concept_id,
     src.route_source_code AS route_source_value,
-    src.dose_unit_source_code AS dose_unit_source_value,
-    --
-    CONCAT('drug.', src.unit_id) AS unit_id,
-    src.load_table_id AS load_table_id,
-    src.load_row_id AS load_row_id,
-    src.trace_id AS trace_id
+    src.dose_unit_source_code AS dose_unit_source_value
 FROM
     {{ ref('int__lk_drug_mapped') }} AS src
 INNER JOIN

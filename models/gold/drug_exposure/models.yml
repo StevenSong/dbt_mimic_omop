@@ -1,0 +1,124 @@
+version: 2
+
+models:
+  - name: drug_exposure
+    description: >
+      This table captures records about the exposure to a Drug ingested 
+      or otherwise introduced into the body. A Drug is a biochemical 
+      substance formulated in such a way that when administered to a 
+      Person it will exert a certain biochemical effect on the metabolism. 
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: drug_exposure_id
+        data_type: UBIGINT
+        description: The unique key given to records of drug dispensings 
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: A foreign key to the person table.
+        tests:
+          - not_null
+
+      - name: drug_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the drug administered, 
+          prescribed, or dispensed.
+        tests:
+          - not_null
+
+      - name: drug_exposure_start_date
+        data_type: DATE
+        description: The date on which the drug exposure started.
+        tests:
+          - not_null
+
+      - name: drug_exposure_start_datetime
+        data_type: datetime
+        description: The date and time at which the drug exposure started.
+
+      - name: drug_exposure_end_date
+        data_type: DATE
+        description: The date on which the drug exposure ended.
+        tests:
+          - not_null
+
+      - name: drug_exposure_end_datetime
+        data_type: DATETIME
+        description: The datetime on which the drug exposure ended.
+
+      - name: verbatim_end_date
+        data_type: DATE
+        description: The verbatim end date as provided in the source data.
+
+      - name: drug_type_concept_id
+        data_type: INT
+        description: The concept identifier for the type of drug exposure
+          record.
+        tests:
+          - not_null
+
+      - name: stop_reason
+        data_type: VARCHAR(20)
+        description: The reason for stopping the drug exposure.
+
+      - name: refills
+        data_type: INTEGER
+        description: The number of refills for a prescription.
+
+      - name: quantity
+        data_type: DOUBLE
+        description: The quantity of the drug supplied.
+
+      - name: days_supply
+        data_type: INTEGER
+        description: The number of days of supply for the drug exposure.
+
+      - name: sig
+        data_type: VARCHAR
+        description: The free-text instructions for how the drug is to be
+          taken or administered.
+
+      - name: route_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the route of administration.
+
+      - name: lot_number
+        data_type: VARCHAR(50)
+        description: The lot number of the drug product.
+
+      - name: provider_id
+        data_type: UBIGINT
+        description: A foreign key to the provider table.
+
+      - name: visit_occurrence_id
+        data_type: UBIGINT
+        description: A foreign key to the visit occurrence table.
+
+      - name: visit_detail_id
+        data_type: BIGINT
+        description: A foreign key to the visit detail table.
+
+      - name: drug_source_value
+        data_type: VARCHAR(50)
+        description: The source code or text from which the drug_concept_id
+          was derived.
+
+      - name: drug_source_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the source code of the drug.
+
+      - name: route_source_value
+        data_type: VARCHAR(50)
+        description: This field houses the verbatim value from the source 
+                     data representing the drug route. 
+
+      - name: dose_unit_source_value
+        data_type: VARCHAR(50)
+        description: The source value for the dose unit of the drug.

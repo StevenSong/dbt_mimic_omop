@@ -8,5 +8,6 @@ dbt_mimic_omop:
       threads: 1
       settings:
         preserve_insertion_order: false
+        # More memory may be required for note_nlp table
         memory_limit: '16GB'
         max_memory: '16GB'

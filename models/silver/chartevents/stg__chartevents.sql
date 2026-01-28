@@ -9,7 +9,8 @@ SELECT
 	CAST(valuenum AS float)                               AS valuenum,
 	valueuom                                              AS valueuom,
 	'chartevents'                                         AS load_table_id,
-	hash(subject_id, hadm_id, stay_id, charttime)         AS load_row_id,
+	 -- this stil results in duplicates
+	hash(subject_id, hadm_id, stay_id, caregiver_id, charttime, itemid, value, valuenum, valueuom) AS load_row_id,
 	json_object(
         'subject_id', subject_id, 
         'hadm_id', hadm_id, 

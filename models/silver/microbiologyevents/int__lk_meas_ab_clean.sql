@@ -1,5 +1,6 @@
 SELECT
     src.subject_id AS subject_id,
+    src.microevent_id as microevent_id,
     src.hadm_id AS hadm_id,
     cr.order_provider_id AS provider_id,
     cr.start_datetime AS start_datetime,
@@ -11,7 +12,11 @@ SELECT
     --
     'micro.antibiotics' AS unit_id,
     src.load_table_id AS load_table_id,
-    0 AS load_row_id,
+    hash(
+        src.load_row_id,
+        cr.order_provider_id,
+        'micro.antibiotics'
+    ) AS load_row_id,
     src.trace_id AS trace_id -- trace_id for antibiotics, no grouping is needed
 FROM
     {{ ref("stg__microbiologyevents") }} AS src

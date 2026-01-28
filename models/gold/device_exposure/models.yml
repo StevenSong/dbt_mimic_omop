@@ -1,0 +1,112 @@
+version: 2
+
+models:
+  - name: device_exposure
+    description: >
+      The Device domain captures information about a person's exposure to a 
+      foreign physical object or instrument which is used for diagnostic or 
+      therapeutic purposes through a mechanism beyond chemical action. 
+      Devices include implantable objects (e.g. pacemakers), medical equipment 
+      and supplies.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: device_exposure_id
+        data_type: UBIGINT
+        description: The unique key given to records of device exposures 
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: A foreign key to the person table.
+        tests:
+          - not_null
+
+      - name: device_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the device exposed to the person. 
+        tests:
+          - not_null
+
+      - name: device_exposure_start_date
+        data_type: DATE
+        description: The date on which the device recorded exposure 
+          started.
+        tests:
+          - not_null
+
+      - name: device_exposure_start_datetime
+        data_type: datetime
+        description: The date and time at which the device recorded exposure 
+          started.
+
+      - name: device_exposure_end_date
+        data_type: DATE
+        description: The date on which the device exposure ended.
+
+      - name: device_exposure_end_datetime
+        data_type: DATETIME
+        description: The datetime on which the device exposure ended.
+
+      - name: device_type_concept_id
+        data_type: INT
+        description: You can use the TYPE_CONCEPT_ID to denote the provenance 
+          of the record, as in whether the record is from administrative claims 
+          or EHR. 
+        tests:
+          - not_null
+
+      - name: unique_device_id
+        data_type: VARCHAR(255)
+        description: The concept identifier for the type of drug exposure
+          record.
+
+      - name: production_id
+        data_type: VARCHAR(255)
+        description: The identifier assigned to the specific device 
+          manufactured.
+
+      - name: quantity
+        data_type: BIGINT
+        description: The number of devices exposed to the person.
+
+      - name: provider_id
+        data_type: UBIGINT
+        description: The provider associated with the device exposure.
+
+      - name: visit_occurrence_id 
+        data_type: UBIGINT
+        description: A foreign key to the visit occurrence during which the 
+          device exposure occurred.
+
+      - name: visit_detail_id
+        data_type: INT
+        description: A foreign key to the visit detail during which the 
+          device exposure occurred.
+
+      - name: device_source_value
+        data_type: VARCHAR(50)
+        description: Vertabim value of device exposure that occurred.
+
+      - name: device_source_concept_id
+        data_type: BIGINT
+        description: The source concept identifier for the device exposed to 
+          the person.
+
+      - name: unit_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the unit of the device exposure.
+
+      - name: unit_source_value
+        data_type: VARCHAR(50)
+        description: The source value for the unit of the device exposure.
+
+      - name: unit_source_concept_id
+        data_type: BIGINT
+        description: The source concept identifier for the unit of the device 
+          exposure.

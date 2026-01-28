@@ -1,0 +1,110 @@
+version: 2
+
+models:
+  - name: observation
+    description: >
+      The OBSERVATION table captures clinical facts about a 
+      Person obtained in the context of examination, questioning 
+      or a procedure. Any data that cannot be represented by any 
+      other domains, such as social and lifestyle facts, medical 
+      history, family history, etc. are recorded here.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: observation_id
+        data_type: UBIGINT
+        description: Unique identifier for each observation
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: Foreign key to the person table
+        tests:
+          - not_null
+
+      - name: observation_concept_id
+        data_type: BIGINT
+        description: Concept identifier for the observation
+        tests:
+          - not_null
+
+      - name: observation_date
+        data_type: DATE
+        description: Date when the observation was made
+        tests:
+          - not_null
+
+      - name: observation_datetime
+        data_type: DATETIME
+        description: Date and time when the observation was made
+        
+      - name: observation_type_concept_id
+        data_type: INT
+        description: Concept identifier for the type of observation
+        tests:
+          - not_null
+
+      - name: value_as_number
+        data_type: DOUBLE
+        description: Numeric value of the observation, if applicable
+
+      - name: value_as_string
+        data_type: VARCHAR(60)
+        description: String value of the observation, if applicable
+
+      - name: value_as_concept_id
+        data_type: BIGINT
+        description: Concept identifier for the value of the observation, if applicable
+
+      - name: qualifier_concept_id
+        data_type: INT
+        description: Concept identifier for any qualifiers associated with the observation
+
+      - name: unit_concept_id
+        data_type: BIGINT
+        description: Concept identifier for the unit of measurement, if applicable
+
+      - name: provider_id
+        data_type: UBIGINT
+        description: Foreign key to the provider table
+
+      - name: visit_occurrence_id
+        data_type: UBIGINT
+        description: Foreign key to the visit occurrence table
+
+      - name: visit_detail_id
+        data_type: BIGINT
+        description: Foreign key to the visit detail table
+
+      - name: observation_source_value
+        data_type: VARCHAR(50)
+        description: Source value for the observation
+
+      - name: observation_source_concept_id
+        data_type: BIGINT
+        description: Concept identifier for the source of the observation
+
+      - name: unit_source_value
+        data_type: VARCHAR(50)
+        description: Source value for the unit of measurement
+
+      - name: qualifier_source_value
+        data_type: VARCHAR(50)
+        description: Source value for the qualifier of the observation
+
+      - name: value_source_value
+        data_type: VARCHAR(50)
+        description: Source value for the value of the observation
+
+      - name: observation_event_id
+        data_type: INT
+        description: Foreign key to the observation event table
+
+      - name: obs_event_field_concept_id
+        data_type: INT
+        description: Concept identifier for the field of the observation event

@@ -1,5 +1,6 @@
 SELECT DISTINCT
     src.subject_id AS subject_id,
+    src.microevent_id as microevent_id,
     src.hadm_id AS hadm_id,
     cr.order_provider_id AS provider_id,
     cr.start_datetime AS start_datetime,
@@ -11,7 +12,11 @@ SELECT DISTINCT
     --
     'micro.organism' AS unit_id,
     src.load_table_id AS load_table_id,
-    0 AS load_row_id,
+    hash(
+        src.load_row_id,
+        cr.order_provider_id,
+        'micro.organism'
+    ) AS load_row_id,
     cr.trace_id_org AS trace_id -- trace_id for test-organism
 FROM
     {{ ref("stg__microbiologyevents") }} AS src

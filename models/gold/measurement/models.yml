@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: measurement
+    description: >
+      The MEASUREMENT table contains records of Measurements, 
+      i.e. structured values (numerical or categorical) obtained 
+      through systematic and standardized examination or testing 
+      of a Person or Persons sample.
+
+    config:
+      contract:
+        enforced: true
+
+    columns:
+      - name: measurement_id
+        data_type: UBIGINT
+        description: The unique key given to a Measurement record for a Person. 
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        data_type: UBIGINT
+        description: Person who is the subject of the measurement.
+        tests:
+          - not_null
+
+      - name: measurement_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the type of measurement.
+        tests:
+          - not_null
+
+      - name: measurement_date
+        data_type: DATE
+        description: The date of the measurement.
+        tests:
+          - not_null
+
+      - name: measurement_datetime
+        data_type: DATETIME
+        description: The date and time of the measurement.
+
+      - name: measurement_time
+        data_type: VARCHAR(10)
+        description: The time of the measurement.
+
+      - name: measurement_type_concept_id
+        data_type: INT
+        description: Whether the measurement was from an EHR system, insurance claim, registry, or other sources. 
+        tests:
+          - not_null
+
+      - name: operator_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the mathematical operator used in the measurement.
+
+      - name: value_as_number
+        data_type: DOUBLE
+        description: The value of the measurement as a number.
+
+      - name: value_as_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the value of the measurement when it is categorical.
+
+      - name: unit_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the unit of measure for the value_as_number.
+
+      - name: range_low
+        data_type: DOUBLE
+        description: The lower bound of the normal range for the measurement.
+
+      - name: range_high
+        data_type: DOUBLE
+        description: The upper bound of the normal range for the measurement.
+
+      - name: provider_id
+        data_type: UBIGINT
+        description: The identifier of the provider who performed the measurement.
+
+      - name: visit_occurrence_id
+        data_type: UBIGINT
+        description: The identifier of the visit during which the measurement was taken.
+
+      - name: visit_detail_id
+        data_type: INT
+        description: The identifier of the visit detail during which the measurement was taken.
+
+      - name: measurement_source_value
+        data_type: VARCHAR(50)
+        description: The source value for the measurement type.
+
+      - name: measurement_source_concept_id
+        data_type: BIGINT
+        description: The concept identifier for the source of the measurement type.
+
+      - name: unit_source_value
+        data_type: VARCHAR(50)
+        description: The source value for the unit of measure.
+
+      - name: unit_source_concept_id
+        data_type: BIGINT
+        description: If unit_source_value is in OMOP supported vocabulary put the concept id for it here.
+
+      - name: value_source_value
+        data_type: VARCHAR(50)
+        description: The source value for the measurement value.
+
+      - name: measurement_event_id
+        data_type: INT
+        description: If value_source_value is in OMOP supported vocabulary put the concept id for it
+
+      - name: meas_event_field_concept_id
+        data_type: INT
+        description: The CONCEPT_ID that identifies which table and field the MEASUREMENT_EVENT_ID came from. 

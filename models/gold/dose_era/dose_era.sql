@@ -258,7 +258,7 @@ SELECT
     unit_concept_id AS unit_concept_id,
     dose_value AS dose_value,
     MIN(drug_exposure_start_date) AS dose_era_start_date,
-    drug_era_end_date AS dose_era_end_date
+    CAST(drug_era_end_date AS DATE) AS dose_era_end_date
 FROM tmp_cteDoseFinalEnds
 GROUP BY
     person_id,

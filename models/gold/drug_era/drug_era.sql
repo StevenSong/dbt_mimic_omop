@@ -232,10 +232,10 @@ SELECT
     person_id AS person_id,
     ingredient_concept_id AS drug_concept_id,
     MIN(drug_sub_exposure_start_date) AS drug_era_start_date,
-    drug_era_end_date AS drug_era_end_date,
-    SUM(drug_exposure_count) AS drug_exposure_count,
-    EXTRACT(DAY FROM (drug_era_end_date - MIN(drug_sub_exposure_start_date))) 
-        - SUM(days_exposed) AS gap_days,
+    CAST(drug_era_end_date AS DATE) AS drug_era_end_date,
+    CAST(SUM(drug_exposure_count) AS BIGINT) AS drug_exposure_count,
+    CAST(EXTRACT(DAY FROM (drug_era_end_date - MIN(drug_sub_exposure_start_date))) 
+        - SUM(days_exposed) AS BIGINT) AS gap_days
 FROM
     tmp_drugera_ends_drug
 GROUP BY
