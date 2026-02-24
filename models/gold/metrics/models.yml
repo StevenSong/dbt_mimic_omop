@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: me_total
+    description: >
+      Total record counts for each OMOP CDM table. Provides an overview
+      of the dataset size and data distribution across clinical domains.
+
+    columns:
+      - name: table_name
+        description: Name of the OMOP CDM table
+        tests:
+          - not_null
+
+      - name: count
+        description: Total number of records in the table
+        tests:
+          - not_null
+
+  - name: me_mapping_rate
+    description: >
+      Concept mapping coverage rates for OMOP CDM tables. For each concept_id
+      field, calculates the count and percentage of records that have been
+      successfully mapped to a standard OMOP concept (concept_id > 0).
+      This is the key metric for evaluating ETL quality.
+
+    columns:
+      - name: table_name
+        description: Name of the OMOP CDM table
+        tests:
+          - not_null
+
+      - name: concept_field
+        description: Name of the concept_id field being measured
+        tests:
+          - not_null
+
+      - name: count
+        description: Number of records with valid mapping (concept_id > 0)
+        tests:
+          - not_null
+
+      - name: percent
+        description: Percentage of records with valid mapping
+        tests:
+          - not_null
+
+      - name: total
+        description: Total number of records with non-null concept_id
+        tests:
+          - not_null
+
+  - name: me_persons_visits
+    description: >
+      Person and visit statistics for the OMOP CDM. Provides demographic
+      breakdowns (gender, race, ethnicity) and visit summaries by type.
+      Useful for characterizing the study population.
+
+    columns:
+      - name: category
+        description: Category of the statistic (e.g., 'Number of persons by Race')
+        tests:
+          - not_null
+
+      - name: name
+        description: Specific value within the category (e.g., 'White', 'Total')
+        tests:
+          - not_null
+
+      - name: count
+        description: Count or value for this category/name combination
+        tests:
+          - not_null

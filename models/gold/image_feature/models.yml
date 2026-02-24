@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: image_feature
+    description: |
+      MI-CDM Image_feature table capturing CheXpert-derived findings from chest X-rays.
+      Each row represents a single radiological finding (positive, negative, or uncertain)
+      for a specific image. Links to image_occurrence for full provenance.
+    config:
+      tags: ['mimic_cxr', 'mi_cdm']
+    columns:
+      - name: image_feature_id
+        description: "Primary key - hash of study_id + finding_name"
+        tests:
+          - unique
+          - not_null
+
+      - name: image_occurrence_id
+        description: "Foreign key to image_occurrence table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('image_occurrence')
+              field: image_occurrence_id
+
+      - name: image_feature_concept_id
+        description: "SNOMED concept_id for the radiological finding"
+        tests:
+          - not_null
+
+      - name: image_feature_type_concept_id
+        description: "Concept indicating feature derivation method (32879 = NLP algorithm)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [32879]
+
+      - name: value_as_number
+        description: "Finding value: 1.0 (positive), 0.0 (negative), -1.0 (uncertain)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1.0, 0.0, -1.0]
+
+      - name: alg_system
+        description: "Algorithm that generated the finding (CheXpert)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['CheXpert']
+
+      - name: feature_source_value
+        description: "Original CheXpert label name (e.g., 'Cardiomegaly', 'Pneumonia')"
+        tests:
+          - not_null

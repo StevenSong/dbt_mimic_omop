@@ -42,6 +42,14 @@ models:
       admissions:
         int__lk_visit_clean:
           +materialized: table
+      # MIMIC-CXR imaging models
+      mimic_cxr:
+        +tags: ['mimic_cxr']
+        # Intermediate models materialized as tables for performance
+        int__imaging_visit_linked:
+          +materialized: table
+        int__imaging_features_pivoted:
+          +materialized: table
     gold:
       +schema: gold
       +materialized: table

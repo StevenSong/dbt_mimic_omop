@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: image_occurrence
+    description: |
+      MI-CDM Image_occurrence table representing imaging events at the DICOM image level.
+      Each row represents a single chest X-ray image from MIMIC-CXR.
+      Links to person and visit_occurrence tables, with file paths for image retrieval.
+    config:
+      tags: ['mimic_cxr', 'mi_cdm']
+    columns:
+      - name: image_occurrence_id
+        description: "Primary key - hash of dicom_id"
+        tests:
+          - unique
+          - not_null
+
+      - name: person_id
+        description: "Foreign key to person table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('person')
+              field: person_id
+
+      - name: visit_occurrence_id
+        description: "Foreign key to visit_occurrence (nullable - not all images link to a visit)"
+
+      - name: image_occurrence_date
+        description: "Date the image was taken (StudyDate from DICOM)"
+        tests:
+          - not_null
+
+      - name: modality_concept_id
+        description: "OMOP concept for imaging modality (CR=4013, DX=4014)"
+        tests:
+          - not_null
+
+      - name: anatomic_site_concept_id
+        description: "SNOMED concept for body site (4218106 = Thorax)"
+        tests:
+          - not_null
+
+      - name: local_path
+        description: "Relative file path to JPEG image"
+        tests:
+          - not_null
+
+      - name: wadors_uri
+        description: "Google Cloud Storage URI for remote image access"
+        tests:
+          - not_null
+
+      - name: image_study_uid
+        description: "DICOM StudyInstanceUID for provenance"
+
+      - name: image_series_uid
+        description: "DICOM SeriesInstanceUID for provenance"
+
+      - name: view_position
+        description: "Radiographic view (PA, AP, LATERAL, etc.)"

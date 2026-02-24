@@ -56,3 +56,14 @@ sources:
       - name: RELATIONSHIP
       - name: VOCABULARY
       - name: custom_mappings
+  - name: mimic_cxr
+    database: mimic_to_omop
+    schema: mimic_cxr
+    description: "MIMIC-CXR chest X-ray metadata from PhysioNet v2.1.0"
+    tables:
+      - name: mimic_cxr_metadata
+        description: "Extracted DICOM metadata fields (ViewPosition, Rows, Columns, StudyDate, etc.)"
+      - name: mimic_cxr_chexpert
+        description: "CheXpert NLP-derived labels for 14 radiological findings"
+      - name: mimic_cxr_split
+        description: "Train/validate/test splits with dicom_id, study_id, subject_id mapping"
