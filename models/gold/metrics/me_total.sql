@@ -44,4 +44,8 @@ UNION ALL
 SELECT 'location' AS table_name, COUNT(*) AS count FROM {{ ref('location') }}
 UNION ALL
 SELECT 'cdm_source' AS table_name, COUNT(*) AS count FROM {{ ref('cdm_source') }}
+UNION ALL
+SELECT 'image_occurrence' AS table_name, COUNT(*) AS count FROM {{ ref('image_occurrence') }}
+UNION ALL
+SELECT 'image_feature' AS table_name, COUNT(*) AS count FROM {{ ref('image_feature') }}
 ORDER BY table_name

@@ -113,4 +113,72 @@ SELECT
     ROUND(AVG(observation_period_end_date - observation_period_start_date), 1) AS count
 FROM {{ ref('observation_period') }}
 
+UNION ALL
+
+-- Number of images - Total
+SELECT
+    'Number of images' AS category,
+    'Total' AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_occurrence') }}
+
+UNION ALL
+
+-- Number of images by view position
+SELECT
+    'Number of images by view_position' AS category,
+    COALESCE(view_position, 'Unknown') AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_occurrence') }}
+GROUP BY view_position
+
+UNION ALL
+
+-- Number of images by modality
+SELECT
+    'Number of images by modality' AS category,
+    COALESCE(modality_source_value, 'Unknown') AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_occurrence') }}
+GROUP BY modality_source_value
+
+UNION ALL
+
+-- Number of images linked to visits
+SELECT
+    'Number of images linked to visits' AS category,
+    'Total' AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_occurrence') }}
+WHERE visit_occurrence_id IS NOT NULL
+
+UNION ALL
+
+-- Number of image features - Total
+SELECT
+    'Number of image features' AS category,
+    'Total' AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_feature') }}
+
+UNION ALL
+
+-- Number of image features by finding
+SELECT
+    'Number of image features by finding' AS category,
+    COALESCE(feature_source_value, 'Unknown') AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_feature') }}
+GROUP BY feature_source_value
+
+UNION ALL
+
+-- Number of image features by value interpretation
+SELECT
+    'Number of image features by interpretation' AS category,
+    value_as_concept_name AS name,
+    COUNT(*) AS count
+FROM {{ ref('image_feature') }}
+GROUP BY value_as_concept_name
+
 ORDER BY category, name

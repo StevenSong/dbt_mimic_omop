@@ -593,4 +593,61 @@ SELECT
 FROM {{ ref('provider') }}
 WHERE gender_concept_id IS NOT NULL
 
+UNION ALL
+
+-- Image Occurrence table
+SELECT
+    'image_occurrence' AS table_name,
+    'modality_concept_id' AS concept_field,
+    COUNT(CASE WHEN modality_concept_id > 0 THEN 1 END) AS count,
+    COALESCE(ROUND(100.0 * COUNT(CASE WHEN modality_concept_id > 0 THEN 1 END) / NULLIF(COUNT(*), 0), 2), 0) AS percent,
+    COUNT(*) AS total
+FROM {{ ref('image_occurrence') }}
+WHERE modality_concept_id IS NOT NULL
+
+UNION ALL
+
+SELECT
+    'image_occurrence' AS table_name,
+    'anatomic_site_concept_id' AS concept_field,
+    COUNT(CASE WHEN anatomic_site_concept_id > 0 THEN 1 END) AS count,
+    COALESCE(ROUND(100.0 * COUNT(CASE WHEN anatomic_site_concept_id > 0 THEN 1 END) / NULLIF(COUNT(*), 0), 2), 0) AS percent,
+    COUNT(*) AS total
+FROM {{ ref('image_occurrence') }}
+WHERE anatomic_site_concept_id IS NOT NULL
+
+UNION ALL
+
+SELECT
+    'image_occurrence' AS table_name,
+    'image_type_concept_id' AS concept_field,
+    COUNT(CASE WHEN image_type_concept_id > 0 THEN 1 END) AS count,
+    COALESCE(ROUND(100.0 * COUNT(CASE WHEN image_type_concept_id > 0 THEN 1 END) / NULLIF(COUNT(*), 0), 2), 0) AS percent,
+    COUNT(*) AS total
+FROM {{ ref('image_occurrence') }}
+WHERE image_type_concept_id IS NOT NULL
+
+UNION ALL
+
+-- Image Feature table
+SELECT
+    'image_feature' AS table_name,
+    'image_feature_concept_id' AS concept_field,
+    COUNT(CASE WHEN image_feature_concept_id > 0 THEN 1 END) AS count,
+    COALESCE(ROUND(100.0 * COUNT(CASE WHEN image_feature_concept_id > 0 THEN 1 END) / NULLIF(COUNT(*), 0), 2), 0) AS percent,
+    COUNT(*) AS total
+FROM {{ ref('image_feature') }}
+WHERE image_feature_concept_id IS NOT NULL
+
+UNION ALL
+
+SELECT
+    'image_feature' AS table_name,
+    'image_feature_type_concept_id' AS concept_field,
+    COUNT(CASE WHEN image_feature_type_concept_id > 0 THEN 1 END) AS count,
+    COALESCE(ROUND(100.0 * COUNT(CASE WHEN image_feature_type_concept_id > 0 THEN 1 END) / NULLIF(COUNT(*), 0), 2), 0) AS percent,
+    COUNT(*) AS total
+FROM {{ ref('image_feature') }}
+WHERE image_feature_type_concept_id IS NOT NULL
+
 ORDER BY table_name, concept_field

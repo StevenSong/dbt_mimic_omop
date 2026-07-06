@@ -2,6 +2,20 @@
 
 Use DBT to convert the MIMIC-IV dataset to OMOP CDM format, with an optional extension for MIMIC-CXR chest X-ray imaging data following the [OHDSI Medical Imaging CDM (MI-CDM)](https://ohdsi.github.io/CommonDataModel/) specification.
 
+## Citation and Reference:
+
+Please cite this work if you fine the pipeline useful:
+
+```
+@inproceedings{sutton2026fast,
+  title={Fast, Accurate, and Local Conversion of MIMIC-IV to OMOP with DBT},
+  author={Sutton, Adam and Moller-Grell, Niko and Searle, Thomas and Dobson, Richard},
+  booktitle={BioNLP 2026},
+  pages={992--996},
+  year={2026}
+}
+```
+
 ## Prerequisites
 
 ## Requirements
