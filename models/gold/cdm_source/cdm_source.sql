@@ -5,8 +5,8 @@ SELECT
     CONCAT('MIMIC-IV is a publicly available database of patients ',
         'admitted to the Beth Israel Deaconess Medical Center in Boston, MA, USA.') AS source_description,
     'https://mimic-iv.mit.edu/docs/' AS source_documentation_reference,
-    'https://github.com/OHDSI/MIMIC/' AS cdm_etl_reference,
-    '2025-03-19'::DATE AS source_release_date, -- to look up
+    'https://github.com/CogStack/dbt_mimic_omop' AS cdm_etl_reference,
+    '2024-10-11'::DATE AS source_release_date, -- MIMIC-IV v3.1 publication date on PhysioNet
     CURRENT_DATE AS cdm_release_date,
     '5.4' AS cdm_version,
     705800 AS cdm_version_concept_id,
