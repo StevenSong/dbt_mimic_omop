@@ -109,11 +109,11 @@ GROUP BY
 )
 
 SELECT
-    hash(src.person_id) AS observation_period_id,
+    {{ omop_id("src.person_id") }} AS observation_period_id,
     src.person_id AS person_id,
     MIN(src.start_date) AS observation_period_start_date,
     MAX(src.end_date) AS observation_period_end_date,
-    CAST(32828 AS UBIGINT) AS period_type_concept_id  -- 32828    OMOP4976901 EHR episode record
+    CAST(32828 AS BIGINT) AS period_type_concept_id  -- 32828    OMOP4976901 EHR episode record
 FROM
     tmp_observation_period AS src
 GROUP BY

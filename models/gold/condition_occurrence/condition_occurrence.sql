@@ -1,5 +1,5 @@
 SELECT
-    hash(src.load_table_id, src.load_row_id, src.trace_id, src.unit_id) AS condition_occurrence_id,
+    {{ omop_id("src.load_table_id, src.load_row_id, src.trace_id, src.unit_id") }} AS condition_occurrence_id,
     per.person_id AS person_id,
     COALESCE(src.target_concept_id, 0) AS condition_concept_id,
     CAST(src.start_datetime AS DATE) AS condition_start_date,
@@ -33,7 +33,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(src.load_table_id, src.load_row_id, src.trace_id, src.unit_id) AS condition_occurrence_id,
+    {{ omop_id("src.load_table_id, src.load_row_id, src.trace_id, src.unit_id") }} AS condition_occurrence_id,
     per.person_id AS person_id,
     COALESCE(src.target_concept_id, 0) AS condition_concept_id,
     CAST(src.start_datetime AS DATE) AS condition_start_date,
@@ -67,7 +67,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(src.load_table_id, src.load_row_id, src.trace_id, src.unit_id, src.measurement_id) AS condition_occurrence_id,
+    {{ omop_id("src.load_table_id, src.load_row_id, src.trace_id, src.unit_id, src.measurement_id") }} AS condition_occurrence_id,
     per.person_id AS person_id,
     COALESCE(src.target_concept_id, 0) AS condition_concept_id,
     CAST(src.start_datetime AS DATE) AS condition_start_date,

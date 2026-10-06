@@ -1,5 +1,5 @@
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS device_exposure_id,
+    {{ omop_id("per.person_id, src.load_table_id, src.load_row_id") }} AS device_exposure_id,
     per.person_id AS person_id,
     src.target_concept_id AS device_concept_id,
     CAST(src.start_datetime AS DATE) AS device_exposure_start_date,
@@ -38,7 +38,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS device_exposure_id,
+    {{ omop_id("per.person_id, src.load_table_id, src.load_row_id") }} AS device_exposure_id,
     per.person_id AS person_id,
     src.target_concept_id AS device_concept_id,
     CAST(src.start_datetime AS DATE) AS device_exposure_start_date,

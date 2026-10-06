@@ -17,7 +17,7 @@ SELECT
     split::VARCHAR                      AS data_split,  -- 'train', 'validate', or 'test'
     -- Traceability columns
     'mimic_cxr_split'                   AS load_table_id,
-    hash(dicom_id)                      AS load_row_id,
+    {{ omop_id("dicom_id") }}                      AS load_row_id,
     json_object(
         'dicom_id', dicom_id,
         'study_id', study_id,

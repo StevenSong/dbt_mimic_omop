@@ -13,14 +13,14 @@ models:
 
     columns:
       - name: procedure_occurrence_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: TThe unique key given to a procedure record for a person.
         tests:
           - not_null
           - unique
 
       - name: person_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Persons identifier.
         tests:
           - not_null
@@ -64,11 +64,11 @@ models:
         description: If the quantity value is omitted, a single procedure is assumed. 
 
       - name: provider_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: There will only be one provider per procedure record, choice has to be made.
 
       - name: visit_occurrence_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: The visit during which the procedure occurred. 
 
       - name: visit_detail_id

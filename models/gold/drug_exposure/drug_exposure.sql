@@ -1,5 +1,5 @@
 SELECT
-    hash(per.person_id, src.hadm_id, vis.visit_occurrence_id, src.load_row_id, src.target_concept_id) AS drug_exposure_id,
+    {{ omop_id("per.person_id, src.hadm_id, vis.visit_occurrence_id, src.load_row_id, src.target_concept_id") }} AS drug_exposure_id,
     per.person_id AS person_id,
     src.target_concept_id AS drug_concept_id,
     CAST(src.start_datetime AS DATE) AS drug_exposure_start_date,

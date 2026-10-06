@@ -1,6 +1,6 @@
 with lk_meas_labevents_clean AS (
 SELECT
-    hash(src.subject_id, src.charttime, src.hadm_id, src.itemid, src.load_row_id) AS measurement_id, 
+    {{ omop_id("src.subject_id, src.charttime, src.hadm_id, src.itemid, src.load_row_id") }} AS measurement_id, 
     src.subject_id AS subject_id,
     src.charttime AS start_datetime, -- measurement_datetime
     src.hadm_id AS hadm_id,

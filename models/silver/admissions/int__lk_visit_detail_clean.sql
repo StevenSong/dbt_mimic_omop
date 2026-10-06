@@ -1,5 +1,5 @@
 SELECT
-    hash('transfers', src.subject_id, src.hadm_id, src.load_row_id) AS visit_detail_id,
+    {{ omop_id("'transfers', src.subject_id, src.hadm_id, src.load_row_id") }} AS visit_detail_id,
     src.subject_id AS subject_id,
     src.hadm_id AS hadm_id,
     src.date_id AS date_id,
@@ -25,7 +25,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash('admissions', src.subject_id, src.hadm_id, src.load_row_id) AS visit_detail_id,
+    {{ omop_id("'admissions', src.subject_id, src.hadm_id, src.load_row_id") }} AS visit_detail_id,
     src.subject_id AS subject_id,
     src.hadm_id AS hadm_id,
     CAST(src.start_datetime AS DATE) AS date_id,
@@ -50,7 +50,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash('services', src.subject_id, src.hadm_id, src.load_row_id) AS visit_detail_id,
+    {{ omop_id("'services', src.subject_id, src.hadm_id, src.load_row_id") }} AS visit_detail_id,
     src.subject_id AS subject_id,
     src.hadm_id AS hadm_id,
     CAST(src.start_datetime AS DATE) AS date_id,

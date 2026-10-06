@@ -12,14 +12,14 @@ models:
 
     columns:
       - name: note_nlp_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Unique identifier for each note
         tests:
           - not_null
           - unique
 
       - name: note_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Foreign key to NOTE table
         tests:
           - not_null

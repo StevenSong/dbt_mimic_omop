@@ -16,7 +16,7 @@ SELECT
     src.image_feature_id                        AS image_feature_id,
     
     -- Foreign key to image_occurrence
-    hash(src.dicom_id)                          AS image_occurrence_id,
+    {{ omop_id("src.dicom_id") }}                          AS image_occurrence_id,
     
     -- Feature concept: SNOMED concept for the finding
     src.finding_concept_id                      AS image_feature_concept_id,
@@ -54,8 +54,8 @@ WHERE src.dicom_id IS NOT NULL
 
 -- imaging disabled (build_cxr: false): empty table with the same columns
 SELECT
-    CAST(NULL AS UBIGINT) AS image_feature_id,
-    CAST(NULL AS UBIGINT) AS image_occurrence_id,
+    CAST(NULL AS BIGINT) AS image_feature_id,
+    CAST(NULL AS BIGINT) AS image_occurrence_id,
     CAST(NULL AS BIGINT) AS image_feature_concept_id,
     CAST(NULL AS INTEGER) AS image_feature_type_concept_id,
     CAST(NULL AS DOUBLE) AS value_as_number,

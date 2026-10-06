@@ -63,7 +63,7 @@ notes_with_visit AS (
 
 
 SELECT
-    hash(nwv.raw_note_id) AS note_id,
+    {{ omop_id("nwv.raw_note_id") }} AS note_id,
     nwv.person_id,
     src.charttime::date AS note_date,
     src.charttime AS note_datetime,
@@ -88,8 +88,8 @@ WHERE nwv.rn = 1
 
 -- notes disabled (build_note: false): empty table matching the contract
 SELECT
-    CAST(NULL AS UBIGINT) AS note_id,
-    CAST(NULL AS UBIGINT) AS person_id,
+    CAST(NULL AS BIGINT) AS note_id,
+    CAST(NULL AS BIGINT) AS person_id,
     CAST(NULL AS DATE) AS note_date,
     CAST(NULL AS TIMESTAMP) AS note_datetime,
     CAST(NULL AS INT) AS note_type_concept_id,
@@ -99,8 +99,8 @@ SELECT
     CAST(NULL AS INT) AS encoding_concept_id,
     CAST(NULL AS INT) AS language_concept_id,
     CAST(NULL AS INT) AS provider_id,
-    CAST(NULL AS UBIGINT) AS visit_occurrence_id,
-    CAST(NULL AS UBIGINT) AS visit_detail_id,
+    CAST(NULL AS BIGINT) AS visit_occurrence_id,
+    CAST(NULL AS BIGINT) AS visit_detail_id,
     CAST(NULL AS VARCHAR) AS note_source_value,
     CAST(NULL AS INT) AS note_event_id,
     CAST(NULL AS INT) AS note_event_field_concept_id

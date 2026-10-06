@@ -90,7 +90,7 @@ GROUP BY
 )
 
 SELECT
-    hash(src.subject_id, src.hadm_id, src.start_datetime, src.end_datetime) AS visit_occurrence_id,
+    {{ omop_id("src.subject_id, src.hadm_id, src.start_datetime, src.end_datetime") }} AS visit_occurrence_id,
     src.subject_id AS subject_id,
     src.hadm_id AS hadm_id,
     CAST(NULL AS DATE) AS date_id,
@@ -113,7 +113,7 @@ FROM
     {{ ref("int__lk_admissions_clean") }} AS src -- adm
 UNION ALL
 SELECT
-    hash(src.subject_id, src.start_datetime, src.end_datetime) AS visit_occurrence_id,
+    {{ omop_id("src.subject_id, src.start_datetime, src.end_datetime") }} AS visit_occurrence_id,
     src.subject_id AS subject_id,
     CAST(NULL AS INTEGER) AS hadm_id,
     src.date_id AS date_id,

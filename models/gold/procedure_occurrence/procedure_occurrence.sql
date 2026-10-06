@@ -1,5 +1,5 @@
 SELECT
-    hash(src.load_table_id, src.load_row_id, src.unit_id) AS procedure_occurrence_id,
+    {{ omop_id("src.load_table_id, src.load_row_id, src.unit_id") }} AS procedure_occurrence_id,
     per.person_id AS person_id,
     src.target_concept_id AS procedure_concept_id,
     CAST(src.start_datetime AS DATE) AS procedure_date,
@@ -33,7 +33,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(per.person_id, src.target_concept_id, vis.visit_occurrence_id, src.start_datetime) AS procedure_occurrence_id,
+    {{ omop_id("per.person_id, src.target_concept_id, vis.visit_occurrence_id, src.start_datetime") }} AS procedure_occurrence_id,
     per.person_id AS person_id,
     src.target_concept_id AS procedure_concept_id,
     CAST(src.start_datetime AS DATE) AS procedure_date,
@@ -67,7 +67,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(per.person_id, src.target_concept_id, vis.visit_occurrence_id, src.start_datetime) AS procedure_occurrence_id,
+    {{ omop_id("per.person_id, src.target_concept_id, vis.visit_occurrence_id, src.start_datetime") }} AS procedure_occurrence_id,
     per.person_id AS person_id,
     src.target_concept_id AS procedure_concept_id,
     CAST(src.start_datetime AS DATE) AS procedure_date,
@@ -102,12 +102,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(
-        per.person_id,
-        vis.visit_occurrence_id,
-        src.target_concept_id,
-        src.start_datetime
-    ) AS procedure_occurrence_id,
+    {{ omop_id("per.person_id, vis.visit_occurrence_id, src.target_concept_id, src.start_datetime") }} AS procedure_occurrence_id,
     per.person_id AS person_id,
     src.target_concept_id AS procedure_concept_id,
     CAST(src.start_datetime AS DATE) AS procedure_date,

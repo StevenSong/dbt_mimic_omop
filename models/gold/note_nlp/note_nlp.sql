@@ -45,8 +45,8 @@ mapped_concepts AS (
 )
 
 SELECT
-    hash(src.meta_note_id, src.nlp_id) AS note_nlp_id,
-    hash(src.meta_note_id)             AS note_id,
+    {{ omop_id("src.meta_note_id, src.nlp_id") }} AS note_nlp_id,
+    {{ omop_id("src.meta_note_id") }}             AS note_id,
     0                                 AS section_concept_id,
 
     SUBSTRING(
@@ -88,14 +88,14 @@ FROM all_annotations src
 LEFT JOIN mapped_concepts mc
     ON src.nlp_cui = mc.concept_code
 LEFT JOIN {{ ref('note') }} n
-    ON hash(src.meta_note_id) = n.note_id
+    ON {{ omop_id("src.meta_note_id") }} = n.note_id
 
 {% else %}
 
 -- note_nlp disabled (build_note_nlp: false): empty table matching the contract
 SELECT
-    CAST(NULL AS UBIGINT) AS note_nlp_id,
-    CAST(NULL AS UBIGINT) AS note_id,
+    CAST(NULL AS BIGINT) AS note_nlp_id,
+    CAST(NULL AS BIGINT) AS note_id,
     CAST(NULL AS INTEGER) AS section_concept_id,
     CAST(NULL AS VARCHAR) AS snippet,
     CAST(NULL AS VARCHAR) AS "offset",

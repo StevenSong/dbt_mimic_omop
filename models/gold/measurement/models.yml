@@ -14,14 +14,14 @@ models:
 
     columns:
       - name: measurement_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: The unique key given to a Measurement record for a Person. 
         tests:
           - not_null
           - unique
 
       - name: person_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Person who is the subject of the measurement.
         tests:
           - not_null
@@ -77,11 +77,11 @@ models:
         description: The upper bound of the normal range for the measurement.
 
       - name: provider_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: The identifier of the provider who performed the measurement.
 
       - name: visit_occurrence_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: The identifier of the visit during which the measurement was taken.
 
       - name: visit_detail_id

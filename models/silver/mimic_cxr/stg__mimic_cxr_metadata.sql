@@ -37,7 +37,7 @@ SELECT
     'CHEST'                                                 AS body_part_examined,
     -- Traceability
     'mimic_cxr_metadata'                                    AS load_table_id,
-    hash(dicom_id)                                          AS load_row_id,
+    {{ omop_id("dicom_id") }}                                          AS load_row_id,
     json_object(
         'dicom_id', dicom_id,
         'study_id', study_id

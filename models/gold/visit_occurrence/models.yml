@@ -12,14 +12,14 @@ models:
 
     columns:
       - name: visit_occurrence_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Unique interactions between a person and the health care system. 
         tests:
           - not_null
           - unique
 
       - name: person_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Persons identifier.
         tests:
           - not_null
@@ -57,11 +57,11 @@ models:
           - not_null
 
       - name: provider_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: There will only be one provider per visit record, choose has to be made.
 
       - name: care_site_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Care site where the visit took place.
 
       - name: visit_source_value
@@ -89,5 +89,5 @@ models:
         description: The source value for where the patient was discharged to after a visit.
 
       - name: preceding_visit_occurrence_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Use this field to find the visit that occurred for the person prior to the given visit. 

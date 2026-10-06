@@ -13,7 +13,7 @@ models:
 
     columns:
       - name: care_site_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Unique identifier for each care site in the dataset.
         tests:
           - not_null

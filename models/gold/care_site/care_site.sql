@@ -1,5 +1,5 @@
 SELECT
-    hash(src.source_code) AS care_site_id,
+    {{ omop_id("src.source_code") }} AS care_site_id,
     src.source_code               AS care_site_name,
     vc2.concept_id                AS place_of_service_concept_id,
     1                             AS location_id,  -- hard-coded BIDMC

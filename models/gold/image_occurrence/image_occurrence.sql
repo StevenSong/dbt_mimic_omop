@@ -13,7 +13,7 @@
 
 SELECT
     -- Primary key: hash of dicom_id for stable ID
-    hash(src.dicom_id)                          AS image_occurrence_id,
+    {{ omop_id("src.dicom_id") }}                          AS image_occurrence_id,
     
     -- Foreign keys to OMOP CDM
     src.person_id                               AS person_id,
@@ -80,9 +80,9 @@ FROM {{ ref("int__imaging_visit_linked") }} src
 
 -- imaging disabled (build_cxr: false): empty table with the same columns
 SELECT
-    CAST(NULL AS UBIGINT) AS image_occurrence_id,
-    CAST(NULL AS UBIGINT) AS person_id,
-    CAST(NULL AS UBIGINT) AS visit_occurrence_id,
+    CAST(NULL AS BIGINT) AS image_occurrence_id,
+    CAST(NULL AS BIGINT) AS person_id,
+    CAST(NULL AS BIGINT) AS visit_occurrence_id,
     CAST(NULL AS BIGINT) AS procedure_occurrence_id,
     CAST(NULL AS DATE) AS image_occurrence_date,
     CAST(NULL AS TIMESTAMP) AS image_occurrence_datetime,

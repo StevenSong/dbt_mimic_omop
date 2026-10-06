@@ -1,5 +1,5 @@
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS observation_id,
+    {{ omop_id("per.person_id, src.load_table_id, src.load_row_id") }} AS observation_id,
     per.person_id AS person_id,
     src.target_concept_id AS observation_concept_id,
     CAST(src.start_datetime AS DATE) AS observation_date,
@@ -81,7 +81,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS observation_id,
+    {{ omop_id("per.person_id, src.load_table_id, src.load_row_id") }} AS observation_id,
     per.person_id AS person_id,
     src.target_concept_id AS observation_concept_id,
     CAST(src.start_datetime AS DATE) AS observation_date,
@@ -119,7 +119,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS observation_id,
+    {{ omop_id("per.person_id, src.load_table_id, src.load_row_id") }} AS observation_id,
     per.person_id AS person_id,
     src.target_concept_id AS observation_concept_id, -- to rename fields in *_mapped
     CAST(src.start_datetime AS DATE) AS observation_date,
@@ -157,7 +157,7 @@ WHERE
 UNION ALL
 
 SELECT
-    hash(per.person_id, src.load_table_id, src.load_row_id) AS observation_id,
+    {{ omop_id("per.person_id, src.load_table_id, src.load_row_id") }} AS observation_id,
     per.person_id AS person_id,
     src.target_concept_id AS observation_concept_id,
     CAST(src.start_datetime AS DATE) AS observation_date,

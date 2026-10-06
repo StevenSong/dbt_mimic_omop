@@ -15,14 +15,14 @@ models:
 
     columns:
       - name: observation_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Unique identifier for each observation
         tests:
           - not_null
           - unique
 
       - name: person_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Foreign key to the person table
         tests:
           - not_null
@@ -70,11 +70,11 @@ models:
         description: Concept identifier for the unit of measurement, if applicable
 
       - name: provider_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Foreign key to the provider table
 
       - name: visit_occurrence_id
-        data_type: UBIGINT
+        data_type: BIGINT
         description: Foreign key to the visit occurrence table
 
       - name: visit_detail_id

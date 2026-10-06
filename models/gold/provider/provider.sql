@@ -5,7 +5,7 @@
 
 {% for rel in relationship_sources %}
     SELECT
-        hash(provider_id) AS provider_id,
+        {{ omop_id("provider_id") }} AS provider_id,
         CAST(NULL AS VARCHAR(255)) AS provider_name,
         CAST(NULL AS VARCHAR(20)) AS npi,
         CAST(NULL AS VARCHAR(20)) AS dea,
