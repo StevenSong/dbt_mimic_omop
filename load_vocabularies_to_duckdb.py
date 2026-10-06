@@ -17,10 +17,13 @@ for csv_file in CSV_DIR.glob("**/*.csv"):
     # we set some fields to varchar to avoid ingestion issues, particularly from emar_detail
     # later ETL will fix this
     con.execute(f"CREATE SCHEMA IF NOT EXISTS athena;")
+    # DRUG_STRENGTH has numeric columns that are empty for the first ~40k rows,
+    # so the default sniffer sample infers them as varchar - scan the whole file
+    sample_size = ", sample_size=-1" if table_name == "DRUG_STRENGTH" else ""
     try:
         con.execute(f"""
             CREATE TABLE IF NOT EXISTS athena.{table_name} AS
-            SELECT * FROM read_csv_auto('{csv_file}');
+            SELECT * FROM read_csv_auto('{csv_file}'{sample_size});
         """)
     except duckdb.duckdb.ConversionException:
         con.execute(f"""
