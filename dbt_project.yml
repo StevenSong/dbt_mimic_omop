@@ -30,6 +30,9 @@ vars:
   # set to true to build image_occurrence / image_feature from MIMIC-CXR
   # (requires load_mimic_cxr_to_duckdb.py)
   # override with: dbt run --vars '{build_cxr: true}'
+  # TODO: fix target_concept_id in data/custom_mappings/gcpt_chexpert_findings.csv
+  # before enabling - most CheXpert findings map to unrelated concepts
+  # (e.g. Atelectasis -> "Unable to manage clothes fastenings", No Finding -> "Single live birth")
   build_cxr: false
 
 # Configuring models

@@ -8,7 +8,7 @@ SELECT
     'https://github.com/OHDSI/MIMIC/' AS cdm_etl_reference,
     '2025-03-19'::DATE AS source_release_date, -- to look up
     CURRENT_DATE AS cdm_release_date,
-    '5.3.1' AS cdm_version,
+    '5.4' AS cdm_version,
     705800 AS cdm_version_concept_id,
     v.vocabulary_version AS vocabulary_version
 FROM 

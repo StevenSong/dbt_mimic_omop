@@ -26,3 +26,47 @@ models:
           - not_null
 
       - name: cdm_holder
+        data_type: varchar(255)
+        description: Name of the organisation responsible for the CDM instance
+        tests:
+          - not_null
+
+      - name: source_description
+        data_type: text
+        description: Description of the source data
+
+      - name: source_documentation_reference
+        data_type: varchar(255)
+        description: URL or other reference to the source documentation
+
+      - name: cdm_etl_reference
+        data_type: varchar(255)
+        description: URL or other reference to the ETL documentation
+
+      - name: source_release_date
+        data_type: date
+        description: Date the source data was released
+        tests:
+          - not_null
+
+      - name: cdm_release_date
+        data_type: date
+        description: Date the CDM instance was created
+        tests:
+          - not_null
+
+      - name: cdm_version
+        data_type: varchar(10)
+        description: Version of the OMOP CDM used
+
+      - name: cdm_version_concept_id
+        data_type: integer
+        description: Concept for the version of the OMOP CDM used
+        tests:
+          - not_null
+
+      - name: vocabulary_version
+        data_type: varchar(20)
+        description: Version of the OMOP vocabulary used
+        tests:
+          - not_null

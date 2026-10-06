@@ -9,5 +9,7 @@ dbt_mimic_omop:
       settings:
         preserve_insertion_order: false
         # More memory may be required for note_nlp table
-        memory_limit: '16GB'
-        max_memory: '16GB'
+        memory_limit: '256GB'
+        max_memory: '256GB'
+        # duckdb defaults to one thread per core; cap it on this shared host
+        threads: 32
