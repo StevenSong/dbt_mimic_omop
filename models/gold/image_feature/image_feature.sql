@@ -9,6 +9,8 @@
     )
 }}
 
+{% if var('build_cxr') %}
+
 SELECT
     -- Primary key
     src.image_feature_id                        AS image_feature_id,
@@ -47,3 +49,22 @@ SELECT
 FROM {{ ref("int__imaging_features_pivoted") }} src
 -- Only include rows where we have a valid image link
 WHERE src.dicom_id IS NOT NULL
+
+{% else %}
+
+-- imaging disabled (build_cxr: false): empty table with the same columns
+SELECT
+    CAST(NULL AS UBIGINT) AS image_feature_id,
+    CAST(NULL AS UBIGINT) AS image_occurrence_id,
+    CAST(NULL AS BIGINT) AS image_feature_concept_id,
+    CAST(NULL AS INTEGER) AS image_feature_type_concept_id,
+    CAST(NULL AS DOUBLE) AS value_as_number,
+    CAST(NULL AS VARCHAR) AS value_as_concept_name,
+    CAST(NULL AS VARCHAR) AS alg_system,
+    CAST(NULL AS TIMESTAMP) AS alg_datetime,
+    CAST(NULL AS VARCHAR) AS feature_source_value,
+    CAST(NULL AS BIGINT) AS study_id,
+    CAST(NULL AS BIGINT) AS subject_id
+WHERE false
+
+{% endif %}

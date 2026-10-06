@@ -27,6 +27,10 @@ vars:
   # override with: dbt run --vars '{build_note: true, build_note_nlp: true}'
   build_note: false
   build_note_nlp: false
+  # set to true to build image_occurrence / image_feature from MIMIC-CXR
+  # (requires load_mimic_cxr_to_duckdb.py)
+  # override with: dbt run --vars '{build_cxr: true}'
+  build_cxr: false
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models

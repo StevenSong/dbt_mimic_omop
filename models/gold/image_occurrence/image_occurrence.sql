@@ -9,6 +9,8 @@
     )
 }}
 
+{% if var('build_cxr') %}
+
 SELECT
     -- Primary key: hash of dicom_id for stable ID
     hash(src.dicom_id)                          AS image_occurrence_id,
@@ -73,3 +75,36 @@ SELECT
     src.patient_orientation                     AS patient_orientation
 
 FROM {{ ref("int__imaging_visit_linked") }} src
+
+{% else %}
+
+-- imaging disabled (build_cxr: false): empty table with the same columns
+SELECT
+    CAST(NULL AS UBIGINT) AS image_occurrence_id,
+    CAST(NULL AS UBIGINT) AS person_id,
+    CAST(NULL AS UBIGINT) AS visit_occurrence_id,
+    CAST(NULL AS BIGINT) AS procedure_occurrence_id,
+    CAST(NULL AS DATE) AS image_occurrence_date,
+    CAST(NULL AS TIMESTAMP) AS image_occurrence_datetime,
+    CAST(NULL AS INTEGER) AS modality_concept_id,
+    CAST(NULL AS INTEGER) AS anatomic_site_concept_id,
+    CAST(NULL AS INTEGER) AS image_type_concept_id,
+    CAST(NULL AS VARCHAR) AS image_study_uid,
+    CAST(NULL AS VARCHAR) AS image_series_uid,
+    CAST(NULL AS INTEGER) AS image_rows,
+    CAST(NULL AS INTEGER) AS image_columns,
+    CAST(NULL AS VARCHAR) AS local_path,
+    CAST(NULL AS VARCHAR) AS wadors_uri,
+    CAST(NULL AS VARCHAR) AS image_source_value,
+    CAST(NULL AS VARCHAR) AS view_position,
+    CAST(NULL AS VARCHAR) AS modality_source_value,
+    CAST(NULL AS VARCHAR) AS anatomic_site_source_value,
+    CAST(NULL AS VARCHAR) AS procedure_source_value,
+    CAST(NULL AS BIGINT) AS study_id,
+    CAST(NULL AS BIGINT) AS subject_id,
+    CAST(NULL AS VARCHAR) AS data_split,
+    CAST(NULL AS VARCHAR) AS view_code_meaning,
+    CAST(NULL AS VARCHAR) AS patient_orientation
+WHERE false
+
+{% endif %}

@@ -5,6 +5,7 @@
 
 {{
     config(
+        enabled=var('build_cxr'),
         tags=['mimic_cxr']
     )
 }}
