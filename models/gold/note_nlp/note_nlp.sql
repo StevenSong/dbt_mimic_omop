@@ -1,3 +1,5 @@
+{% if var('build_note_nlp') %}
+
 WITH all_annotations AS (
     SELECT * FROM {{ ref('stg__discharge_annotations') }}
     UNION ALL
@@ -87,3 +89,25 @@ LEFT JOIN mapped_concepts mc
     ON src.nlp_cui = mc.concept_code
 LEFT JOIN {{ ref('note') }} n
     ON hash(src.meta_note_id) = n.note_id
+
+{% else %}
+
+-- note_nlp disabled (build_note_nlp: false): empty table matching the contract
+SELECT
+    CAST(NULL AS UBIGINT) AS note_nlp_id,
+    CAST(NULL AS UBIGINT) AS note_id,
+    CAST(NULL AS INTEGER) AS section_concept_id,
+    CAST(NULL AS VARCHAR) AS snippet,
+    CAST(NULL AS VARCHAR) AS "offset",
+    CAST(NULL AS VARCHAR) AS lexical_variant,
+    CAST(NULL AS BIGINT) AS note_nlp_concept_id,
+    CAST(NULL AS VARCHAR) AS note_nlp_source_concept_id,
+    CAST(NULL AS VARCHAR) AS nlp_system,
+    CAST(NULL AS DATE) AS nlp_date,
+    CAST(NULL AS TIMESTAMP) AS nlp_datetime,
+    CAST(NULL AS VARCHAR) AS term_exists,
+    CAST(NULL AS VARCHAR) AS term_temporal,
+    CAST(NULL AS VARCHAR) AS term_modifiers
+WHERE false
+
+{% endif %}

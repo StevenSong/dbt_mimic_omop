@@ -1,3 +1,5 @@
+{{ config(enabled=var('build_note_nlp')) }}
+
 -- has some duplicates, this handles it
 SELECT *
 FROM (

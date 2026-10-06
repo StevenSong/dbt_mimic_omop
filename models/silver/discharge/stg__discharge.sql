@@ -1,3 +1,5 @@
+{{ config(enabled=var('build_note')) }}
+
 SELECT
     note_id AS note_id,
     subject_id AS subject_id,
