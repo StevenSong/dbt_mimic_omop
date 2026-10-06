@@ -11,3 +11,5 @@ data/athena_vocabulary/*.csv
 *.duckdb
 *.user.yml
 .devcontainer/devcontainer-lock.json
+# MIMIC-derived OMOP export (PhysioNet DUA - never commit)
+data/omop_parquet/
